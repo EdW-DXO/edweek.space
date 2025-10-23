@@ -1,1 +1,383 @@
 
+/* Critical styles */
+    body { background: #f8f9fa; }
+    .logo-box { width:80px; height:80px; border-radius:8px; margin-right:32px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:#0047bb; overflow:hidden; }
+    .logo-box img { width:100%; height:100%; object-fit:cover; display:block; }
+    header .container { align-items:center; }
+    .card-link { transition: transform .08s ease, box-shadow .2s ease; }
+    .card-link:hover { transform: translateY(-3px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.1); }
+    .category-pill { font-size:.9rem; }
+    .link-icon { width:84px; height:84px; border-radius:16px; display:flex; align-items:center; justify-content:center; background:#eef5ff; color:#0f25a2; font-size:2rem; position:relative; }
+    footer { background:#fff; }
+    .custom-tooltip {
+      position: fixed;
+      background: #333;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeInOut 2s ease;
+    }
+
+	/* Prevent the square icon tile from shrinking */
+	.card-body .link-icon {
+	  flex: 0 0 84px;        /* width lock + no shrink */
+	}
+	
+	/* Let the text area take remaining space and wrap properly */
+	.card-body .link-icon + div {
+	  flex: 1 1 auto;
+	  min-width: 0;          /* enables wrapping/truncation instead of pushing the icon */
+	  word-wrap: break-word; /* optional: more aggressive wrapping */
+	}
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0; }
+      10%, 90% { opacity: 1; }
+    }
+
+	/* = THEME VARIABLES = #0d6efd */
+	:root {
+	  --bg: #f8f9fa;
+	  --text: #212529;
+	  --subtle: #6c757d;
+	  --card-bg: #ffffff;
+	  --card-border: #dee2e6;
+	  --linkicon-bg: #eef5ff;
+	  --linkicon-fg: #0f25a2;
+	}
+
+	/* Dark theme */
+	[data-theme="dark"] {
+	  --bg: #0f1115;
+	  --text: #e9ecef;
+	  --subtle: #b6c0cc;
+	  --card-bg: #161a21;
+	  --card-border: #2a2f3a;
+	  --linkicon-bg: #1c2230;
+	  --linkicon-fg: #66a3ff;
+	}
+
+	/* Apply variables (minimal overrides to your existing styles) */
+	body { background: var(--bg); color: var(--text); }
+	
+	header.bg-white,
+	footer { background: var(--card-bg) !important; }
+	
+	.card { background: var(--card-bg); border-color: var(--card-border); }
+	.card-link:hover { box-shadow: 0 .5rem 1rem rgba(0,0,0,.25); } /* slightly stronger in dark */
+	
+	.text-secondary { color: var(--subtle) !important; }
+	
+	.link-icon { background: var(--linkicon-bg); color: var(--linkicon-fg); }
+	
+	/* Inputs */
+	.input-group-text, .form-control {
+	  background: var(--card-bg);
+	  color: var(--text);
+	  border-color: var(--card-border);
+	}
+	
+	/* - Buttons: keep good contrast in both themes - */
+	.btn-outline-secondary {
+	  color: var(--text);
+	  border-color: var(--card-border);
+	}
+	.btn-outline-secondary:hover,
+	.btn-outline-secondary:focus {
+	  /* Light theme: go to Bootstrap’s secondary for contrast */
+	  background-color: #6c757d;
+	  border-color: #6c757d;
+	  color: #fff;
+	}
+	
+	/* Dark theme: use a darker hover surface for contrast */
+	[data-theme="dark"] .btn-outline-secondary:hover,
+	[data-theme="dark"] .btn-outline-secondary:focus {
+	  background-color: #3a4150;
+	  border-color: #3a4150;
+	  color: #fff;
+	}
+	
+	/* Keep the active filter button readable in dark */
+	[data-theme="dark"] .btn-primary {
+	  background-color: #5a8dff;
+	  border-color: #5a8dff;
+	  color: #0b1220;
+	}
+	
+	/* - Card text colors respect theme - */
+	.card h5,
+	.card .card-title { color: var(--text); }
+	.card p,
+	.card .card-text { color: var(--subtle); }
+	
+	/* - Inputs + placeholder colors - */
+	:root { --placeholder: #6c757d; }
+	[data-theme="dark"] { --placeholder: #8c96a3; }
+	
+	.form-control,
+	.input-group-text {
+	  background: var(--card-bg);
+	  color: var(--text);
+	  border-color: var(--card-border);
+	}
+	
+	.form-control::placeholder {
+	  color: var(--placeholder);
+	  opacity: 1; /* ensure visible */
+	}
+	
+	/* Make the search icon contrast-y in dark */
+	[data-theme="dark"] .input-group-text i { color: var(--subtle); }
+	
+	/* Managed by DXO etc. */
+	.managed-by {
+	  font-size: 0.8em;
+	  color: #6c757d;
+	}
+
+	/*
+	.alert-info {
+	  background-color:  !important;
+	  border-color:  !important;
+	  color:  !important;
+	}
+	.alert-info a {
+	  color:  !important;
+	}
+	*/
+	/* 
+	header.position-sticky.top-0.z-3 {
+	  background-image: linear-gradient(5deg, #fff, #6c757d) !important;
+	  background-size: cover;
+	  background-position: center;
+	}
+	*/
+
+
+
+	/* Strip any background/box styles */
+	.logo-box {
+	  background: transparent !important;
+	  box-shadow: none !important;
+	  border: 0 !important;
+	}
+	
+	/* Make sure the image itself doesn’t carry a bg */
+	.logo-box > img {
+	  background: transparent !important;
+	}
+	
+	/* In case a utility class (e.g., .bg-primary) leaked onto it */
+	.logo-box[class*="bg-"] { background: transparent !important; }
+	
+	/* If you accidentally added a ::before earlier, clear it */
+	.logo-box::before {
+	  content: none !important;
+	}
+
+
+	/* ===== OVERRIDES: box height, logo size, hat placement ===== */
+	
+	/* 1) Control the white/blue box height (the logo container) */
+	header .logo-box,
+	.logo-box {
+	  position: relative;
+	  height: var(--logo-box-height, 110px);  /* ← adjust digit by digit */
+	  display: flex;
+	  align-items: center;                    /* vertically center the logo */
+	}
+	
+	/* 2) Force the LOGO image to stop growing */
+	header .logo-box > img,
+	.logo-box > img {
+	  display: block;
+	  width: auto !important;                 /* kill any old width: 65% */
+	  height: auto !important;
+	  max-height: var(--logo-max-height, 64px) !important; /* ← adjust */
+	  object-fit: contain;
+	}
+	
+	/* 3) Xmas hat overlay (independent from logo size) */
+	header .logo-box.xmas::after,
+	.logo-box.xmas::after {
+	  content: "";
+	  position: absolute;
+	  /* Fine-tune these three numbers only */
+	  width: var(--hat-width, 90px);          /* ← hat pixel width */
+	  aspect-ratio: 1 / 1;
+	  top: var(--hat-offset-y, -21px);        /* up(-) / down(+) */
+	  right: var(--hat-offset-x, -10px);       /* left(-) / right(+) */
+	  background: url("halloween-hat2.png") no-repeat center / contain;
+	  pointer-events: none;
+	  z-index: 2;
+	}
+
+
+	/* Remove Bootstrap's default bottom border on the header */
+	header.border-bottom {
+	  border-bottom: 0 !important;
+	  position: relative; /* needed for the pseudo-line */
+	}
+	
+	/* Draw a custom blue line at the very bottom of the header */
+	header.border-bottom::after {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  height:1px;           /* thickness of the line */
+	  background: #0526a9;   /* blue color */
+	  pointer-events: none;
+	}
+
+/* */
+
+	footer .dxo-link {
+	  position: relative;
+	  display: inline-block;
+	  cursor: pointer;
+	  color: inherit;
+	  text-decoration: none;
+	  transition: color .25s ease;
+	}
+	
+	footer .dxo-link::after {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  bottom: -2px;
+	  width: 100%;
+	  height: 2px;
+	  background: linear-gradient(90deg,#0d6efd,#20c997,#6610f2);
+	  transform: scaleX(0);
+	  transform-origin: left;
+	  transition: transform .25s ease;
+	  border-radius: 2px;
+	}
+	
+	footer .dxo-link:hover {
+	  color: #0d6efd;
+	}
+	
+	footer .dxo-link:hover::after {
+	  transform: scaleX(1);
+	}
+	
+	/* Remove default hyperlink styling */
+	footer a.no-link-style {
+	  color: inherit;            /* match surrounding text color */
+	  text-decoration: none;     /* remove underline */
+	}
+	
+	/* Keep hover animation & gradient underline */
+	footer a.no-link-style:hover {
+	  color: #0d6efd;            /* subtle blue highlight */
+	  text-decoration: none;     /* still no underline */
+	}
+	
+	
+	
+	/* Allow bats to escape the box */
+	.logo-box {
+	  position: relative;
+	  overflow: visible; /* important */
+	}
+	
+	
+	/* Bat emoji styling */
+	.bat {
+	  position: absolute;
+	  left: 55%;
+	  top: 15%;
+	  transform: translate(-50%, -50%) scale(1);
+	  font-size: 18px;
+	  line-height: 1;
+	  pointer-events: none;
+	  user-select: none;
+	  filter: drop-shadow(0 1px 2px rgba(0,0,0,.4));
+	  animation: bat-fly var(--dur,1.6s) ease-out forwards;
+	  opacity: 0;
+	}
+	
+	/* Bat animation */
+	@keyframes bat-fly {
+	  0% {
+		transform: translate(0,0) scale(1) rotate(0deg);
+		opacity: 0;
+	  }
+	  10% { opacity: 1; }
+	  30% {
+		transform: translate(var(--dx,40px), var(--dy,-40px)) scale(1.1) rotate(8deg);
+	  }
+	  60% {
+		transform: translate(calc(var(--dx,40px) * 1.2), calc(var(--dy,-40px) * 1.2)) scale(0.95) rotate(-6deg);
+	  }
+	  100% {
+		transform: translate(calc(var(--dx,40px) * 1.6), calc(var(--dy,-40px) * 1.6)) scale(1.05) rotate(10deg);
+		opacity: 0;
+	  }
+	}
+
+
+	/* Ticker container */
+	.ticker-bar{
+	  position: relative;
+	  z-index: 2;                 /* sit above backgrounds but below sticky header if needed */
+	  overflow: hidden;
+	  width: 100%;
+	  height: 2.25rem;            /* taller for legibility */
+	  display: flex;
+	  align-items: center;
+	  background: rgba(13,110,253,.08);           /* light EdWeek blue tint */
+	  border-bottom: 1px solid rgba(13,110,253,.25);
+	}
+	
+	/* Moving track */
+	.ticker-track{
+	  display: inline-block;
+	  white-space: nowrap;
+	  will-change: transform;
+	  animation: ticker-move 35s linear infinite;
+	}
+	
+	/* Items */
+	.ticker-item{
+	  display: inline-block;
+	  padding: 0 2.5rem;
+	  font-size: 0.9rem;
+	  font-weight: 500;
+	  color: #0d6efd;
+	  line-height: 2.25rem;
+	}
+	
+	/* Smooth infinite loop: from fully off-screen right to fully off-screen left */
+	@keyframes ticker-move{
+	  0%   { transform: translateX(0); }
+	  100% { transform: translateX(-50%); } /* because we duplicated items once */
+	}
+	
+	/* Pause on hover for readability */
+	.ticker-bar:hover .ticker-track{ animation-play-state: paused; }
+	
+	/* Dark mode (theme or system) */
+	:root[data-bs-theme="dark"] .ticker-bar{
+	  background: rgba(255,255,255,.05);
+	  border-bottom-color: rgba(255,255,255,.12);
+	}
+	:root[data-bs-theme="dark"] .ticker-item{ color: #9ec5fe; }
+	@media (prefers-color-scheme: dark){
+	  .ticker-bar{ background: rgba(255,255,255,.05); border-bottom-color: rgba(255,255,255,.12); }
+	  .ticker-item{ color: #9ec5fe; }
+	}
+	
+	/* Accessibility: respect reduced motion */
+	@media (prefers-reduced-motion: reduce){
+	  .ticker-track{ animation: none; }
+	}
+
