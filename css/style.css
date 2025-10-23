@@ -212,7 +212,7 @@
 	  aspect-ratio: 1 / 1;
 	  top: var(--hat-offset-y, -21px);        /* up(-) / down(+) */
 	  right: var(--hat-offset-x, -10px);       /* left(-) / right(+) */
-	  background: url("/img/halloween-hat2.png") no-repeat center / contain;
+	  background-image: url("/img/halloween-hat2.png") no-repeat center / contain;
 	  pointer-events: none;
 	  z-index: 2;
 	}
