@@ -1,14 +1,1320 @@
-<!DOCTYPE html>
+<!-- 
+          ===           \|/           xxx      
+         (o o)         (o o)         (o o)     
+    -ooO--(_)--Ooo-ooO--(_)--Ooo-ooO--(_)--Ooo-
+  ╔═════════════════════════════════════════════╗
+  ║  Coded with care & purpose by EdWeek’s DXO  ║
+  ╚═════════════════════════════════════════════╝
+       ██████████   █████ █████    ███████   
+      ░░███░░░░███ ░░███ ░░███   ███░░░░░███ 
+       ░███   ░░███ ░░███ ███   ███     ░░███
+       ░███    ░███  ░░█████   ░███      ░███
+       ░███    ░███   ███░███  ░███      ░███
+       ░███    ███   ███ ░░███ ░░███     ███ 
+      ░██████████   █████ █████ ░░░███████░  
+      ░░░░░░░░░░   ░░░░░ ░░░░░    ░░░░░░░    
+                                       
+	Version 0.9.9-beta / Build 202403
+	Last updated: October 23, 2025
+
+  ==============================================================
+   This site (edweek.space) is for internal use only.
+   All content, code, and data are proprietary to EdWeek.
+   Unauthorized access, indexing, AI/LLM training, or scraping
+   of any kind is strictly prohibited.
+  ==============================================================
+-->
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World Page</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="icon" href="img/favicon.ico" sizes="32x32">
-  </head>
-  <body>
-    <h1>Hello World!!!</h1>
-    <script src="script.js"></script>
-  </body>
+<head>
+  <base target="_blank">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>www.edweek.space · EPE/EdWeek Space</title>
+  <meta name="description" content="Quick links to internal tools and resources." />
+	<!-- Prevent and block search indexing and AI/LLM crawling -->
+	<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, nocache">
+	<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, nocache">
+	<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, nocache">
+	<meta http-equiv="X-Robots-Tag" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+	<!-- Block AI and LLM content usage -->
+	<meta name="google-extended" content="none">
+	<meta name="robots" content="noai, noimageai">
+	<meta name="ai-content-policy" content="deny">
+	<meta name="anthropic-ai" content="noai">
+	<meta name="openai" content="deny">
+	<meta name="perplexity-ai" content="deny">
+	<meta name="cohere-ai" content="deny">
+	<meta name="duckassist" content="deny">
+	<!-- Added referrer policy for privacy -->
+	<meta name="referrer" content="no-referrer">
+  <!-- Additional directives in robots.txt and .htaccess for server-level enforcement-->
+  <!-- Favicons & App Icons - needs additional work-->
+  <link rel="icon" href="/assets/edw-sq-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/edw-sq-logo.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" sizes="32x32" href="/assets/edw-sq-logo-32.png" type="image/png">
+  <link rel="icon" sizes="192x192" href="/assets/edw-sq-logo-192.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/edw-sq-logo.png">
+
+  <!-- Load ext. CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+	/* Critical styles */
+    body { background: #f8f9fa; }
+    .logo-box { width:80px; height:80px; border-radius:8px; margin-right:32px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:#0047bb; overflow:hidden; }
+    .logo-box img { width:100%; height:100%; object-fit:cover; display:block; }
+    header .container { align-items:center; }
+    .card-link { transition: transform .08s ease, box-shadow .2s ease; }
+    .card-link:hover { transform: translateY(-3px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.1); }
+    .category-pill { font-size:.9rem; }
+    .link-icon { width:84px; height:84px; border-radius:16px; display:flex; align-items:center; justify-content:center; background:#eef5ff; color:#0f25a2; font-size:2rem; position:relative; }
+    footer { background:#fff; }
+    .custom-tooltip {
+      position: fixed;
+      background: #333;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeInOut 2s ease;
+    }
+
+	/* Prevent the square icon tile from shrinking */
+	.card-body .link-icon {
+	  flex: 0 0 84px;        /* width lock + no shrink */
+	}
+	
+	/* Let the text area take remaining space and wrap properly */
+	.card-body .link-icon + div {
+	  flex: 1 1 auto;
+	  min-width: 0;          /* enables wrapping/truncation instead of pushing the icon */
+	  word-wrap: break-word; /* optional: more aggressive wrapping */
+	}
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0; }
+      10%, 90% { opacity: 1; }
+    }
+
+	/* = THEME VARIABLES = #0d6efd */
+	:root {
+	  --bg: #f8f9fa;
+	  --text: #212529;
+	  --subtle: #6c757d;
+	  --card-bg: #ffffff;
+	  --card-border: #dee2e6;
+	  --linkicon-bg: #eef5ff;
+	  --linkicon-fg: #0f25a2;
+	}
+
+	/* Dark theme */
+	[data-theme="dark"] {
+	  --bg: #0f1115;
+	  --text: #e9ecef;
+	  --subtle: #b6c0cc;
+	  --card-bg: #161a21;
+	  --card-border: #2a2f3a;
+	  --linkicon-bg: #1c2230;
+	  --linkicon-fg: #66a3ff;
+	}
+
+	/* Apply variables (minimal overrides to your existing styles) */
+	body { background: var(--bg); color: var(--text); }
+	
+	header.bg-white,
+	footer { background: var(--card-bg) !important; }
+	
+	.card { background: var(--card-bg); border-color: var(--card-border); }
+	.card-link:hover { box-shadow: 0 .5rem 1rem rgba(0,0,0,.25); } /* slightly stronger in dark */
+	
+	.text-secondary { color: var(--subtle) !important; }
+	
+	.link-icon { background: var(--linkicon-bg); color: var(--linkicon-fg); }
+	
+	/* Inputs */
+	.input-group-text, .form-control {
+	  background: var(--card-bg);
+	  color: var(--text);
+	  border-color: var(--card-border);
+	}
+	
+	/* - Buttons: keep good contrast in both themes - */
+	.btn-outline-secondary {
+	  color: var(--text);
+	  border-color: var(--card-border);
+	}
+	.btn-outline-secondary:hover,
+	.btn-outline-secondary:focus {
+	  /* Light theme: go to Bootstrap’s secondary for contrast */
+	  background-color: #6c757d;
+	  border-color: #6c757d;
+	  color: #fff;
+	}
+	
+	/* Dark theme: use a darker hover surface for contrast */
+	[data-theme="dark"] .btn-outline-secondary:hover,
+	[data-theme="dark"] .btn-outline-secondary:focus {
+	  background-color: #3a4150;
+	  border-color: #3a4150;
+	  color: #fff;
+	}
+	
+	/* Keep the active filter button readable in dark */
+	[data-theme="dark"] .btn-primary {
+	  background-color: #5a8dff;
+	  border-color: #5a8dff;
+	  color: #0b1220;
+	}
+	
+	/* - Card text colors respect theme - */
+	.card h5,
+	.card .card-title { color: var(--text); }
+	.card p,
+	.card .card-text { color: var(--subtle); }
+	
+	/* - Inputs + placeholder colors - */
+	:root { --placeholder: #6c757d; }
+	[data-theme="dark"] { --placeholder: #8c96a3; }
+	
+	.form-control,
+	.input-group-text {
+	  background: var(--card-bg);
+	  color: var(--text);
+	  border-color: var(--card-border);
+	}
+	
+	.form-control::placeholder {
+	  color: var(--placeholder);
+	  opacity: 1; /* ensure visible */
+	}
+	
+	/* Make the search icon contrast-y in dark */
+	[data-theme="dark"] .input-group-text i { color: var(--subtle); }
+	
+	/* Managed by DXO etc. */
+	.managed-by {
+	  font-size: 0.8em;
+	  color: #6c757d;
+	}
+
+	/*
+	.alert-info {
+	  background-color:  !important;
+	  border-color:  !important;
+	  color:  !important;
+	}
+	.alert-info a {
+	  color:  !important;
+	}
+	*/
+	/* 
+	header.position-sticky.top-0.z-3 {
+	  background-image: linear-gradient(5deg, #fff, #6c757d) !important;
+	  background-size: cover;
+	  background-position: center;
+	}
+	*/
+
+
+
+	/* Strip any background/box styles */
+	.logo-box {
+	  background: transparent !important;
+	  box-shadow: none !important;
+	  border: 0 !important;
+	}
+	
+	/* Make sure the image itself doesn’t carry a bg */
+	.logo-box > img {
+	  background: transparent !important;
+	}
+	
+	/* In case a utility class (e.g., .bg-primary) leaked onto it */
+	.logo-box[class*="bg-"] { background: transparent !important; }
+	
+	/* If you accidentally added a ::before earlier, clear it */
+	.logo-box::before {
+	  content: none !important;
+	}
+
+
+	/* ===== OVERRIDES: box height, logo size, hat placement ===== */
+	
+	/* 1) Control the white/blue box height (the logo container) */
+	header .logo-box,
+	.logo-box {
+	  position: relative;
+	  height: var(--logo-box-height, 110px);  /* ← adjust digit by digit */
+	  display: flex;
+	  align-items: center;                    /* vertically center the logo */
+	}
+	
+	/* 2) Force the LOGO image to stop growing */
+	header .logo-box > img,
+	.logo-box > img {
+	  display: block;
+	  width: auto !important;                 /* kill any old width: 65% */
+	  height: auto !important;
+	  max-height: var(--logo-max-height, 64px) !important; /* ← adjust */
+	  object-fit: contain;
+	}
+	
+	/* 3) Xmas hat overlay (independent from logo size) */
+	header .logo-box.xmas::after,
+	.logo-box.xmas::after {
+	  content: "";
+	  position: absolute;
+	  /* Fine-tune these three numbers only */
+	  width: var(--hat-width, 90px);          /* ← hat pixel width */
+	  aspect-ratio: 1 / 1;
+	  top: var(--hat-offset-y, -21px);        /* up(-) / down(+) */
+	  right: var(--hat-offset-x, -10px);       /* left(-) / right(+) */
+	  background: url("halloween-hat2.png") no-repeat center / contain;
+	  pointer-events: none;
+	  z-index: 2;
+	}
+
+
+	/* Remove Bootstrap's default bottom border on the header */
+	header.border-bottom {
+	  border-bottom: 0 !important;
+	  position: relative; /* needed for the pseudo-line */
+	}
+	
+	/* Draw a custom blue line at the very bottom of the header */
+	header.border-bottom::after {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  height:1px;           /* thickness of the line */
+	  background: #0526a9;   /* blue color */
+	  pointer-events: none;
+	}
+
+/* */
+
+	footer .dxo-link {
+	  position: relative;
+	  display: inline-block;
+	  cursor: pointer;
+	  color: inherit;
+	  text-decoration: none;
+	  transition: color .25s ease;
+	}
+	
+	footer .dxo-link::after {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  bottom: -2px;
+	  width: 100%;
+	  height: 2px;
+	  background: linear-gradient(90deg,#0d6efd,#20c997,#6610f2);
+	  transform: scaleX(0);
+	  transform-origin: left;
+	  transition: transform .25s ease;
+	  border-radius: 2px;
+	}
+	
+	footer .dxo-link:hover {
+	  color: #0d6efd;
+	}
+	
+	footer .dxo-link:hover::after {
+	  transform: scaleX(1);
+	}
+	
+	/* Remove default hyperlink styling */
+	footer a.no-link-style {
+	  color: inherit;            /* match surrounding text color */
+	  text-decoration: none;     /* remove underline */
+	}
+	
+	/* Keep hover animation & gradient underline */
+	footer a.no-link-style:hover {
+	  color: #0d6efd;            /* subtle blue highlight */
+	  text-decoration: none;     /* still no underline */
+	}
+	
+	
+	
+	/* Allow bats to escape the box */
+	.logo-box {
+	  position: relative;
+	  overflow: visible; /* important */
+	}
+	
+	
+	/* Bat emoji styling */
+	.bat {
+	  position: absolute;
+	  left: 55%;
+	  top: 15%;
+	  transform: translate(-50%, -50%) scale(1);
+	  font-size: 18px;
+	  line-height: 1;
+	  pointer-events: none;
+	  user-select: none;
+	  filter: drop-shadow(0 1px 2px rgba(0,0,0,.4));
+	  animation: bat-fly var(--dur,1.6s) ease-out forwards;
+	  opacity: 0;
+	}
+	
+	/* Bat animation */
+	@keyframes bat-fly {
+	  0% {
+		transform: translate(0,0) scale(1) rotate(0deg);
+		opacity: 0;
+	  }
+	  10% { opacity: 1; }
+	  30% {
+		transform: translate(var(--dx,40px), var(--dy,-40px)) scale(1.1) rotate(8deg);
+	  }
+	  60% {
+		transform: translate(calc(var(--dx,40px) * 1.2), calc(var(--dy,-40px) * 1.2)) scale(0.95) rotate(-6deg);
+	  }
+	  100% {
+		transform: translate(calc(var(--dx,40px) * 1.6), calc(var(--dy,-40px) * 1.6)) scale(1.05) rotate(10deg);
+		opacity: 0;
+	  }
+	}
+
+
+	/* Ticker container */
+	.ticker-bar{
+	  position: relative;
+	  z-index: 2;                 /* sit above backgrounds but below sticky header if needed */
+	  overflow: hidden;
+	  width: 100%;
+	  height: 2.25rem;            /* taller for legibility */
+	  display: flex;
+	  align-items: center;
+	  background: rgba(13,110,253,.08);           /* light EdWeek blue tint */
+	  border-bottom: 1px solid rgba(13,110,253,.25);
+	}
+	
+	/* Moving track */
+	.ticker-track{
+	  display: inline-block;
+	  white-space: nowrap;
+	  will-change: transform;
+	  animation: ticker-move 35s linear infinite;
+	}
+	
+	/* Items */
+	.ticker-item{
+	  display: inline-block;
+	  padding: 0 2.5rem;
+	  font-size: 0.9rem;
+	  font-weight: 500;
+	  color: #0d6efd;
+	  line-height: 2.25rem;
+	}
+	
+	/* Smooth infinite loop: from fully off-screen right to fully off-screen left */
+	@keyframes ticker-move{
+	  0%   { transform: translateX(0); }
+	  100% { transform: translateX(-50%); } /* because we duplicated items once */
+	}
+	
+	/* Pause on hover for readability */
+	.ticker-bar:hover .ticker-track{ animation-play-state: paused; }
+	
+	/* Dark mode (theme or system) */
+	:root[data-bs-theme="dark"] .ticker-bar{
+	  background: rgba(255,255,255,.05);
+	  border-bottom-color: rgba(255,255,255,.12);
+	}
+	:root[data-bs-theme="dark"] .ticker-item{ color: #9ec5fe; }
+	@media (prefers-color-scheme: dark){
+	  .ticker-bar{ background: rgba(255,255,255,.05); border-bottom-color: rgba(255,255,255,.12); }
+	  .ticker-item{ color: #9ec5fe; }
+	}
+	
+	/* Accessibility: respect reduced motion */
+	@media (prefers-reduced-motion: reduce){
+	  .ticker-track{ animation: none; }
+	}
+
+
+  </style>
+  <script src="edweek-space-copy-email.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="border-bottom bg-white position-sticky top-0 z-3">
+    <div class="container py-3 d-flex">
+    <!-- logo + title -->
+      <div class="logo-box xmas"><img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP4AAAD4CAYAAADMz1tMAAAACXBIWXMAAC4jAAAuIwF4pT92AABtMUlEQVR4nO39ebwl1XnfC3/XVLWHM3U3DTSDQBIIjYBAAwKBQLNkDbac2E7iONHrOHnv9RvHzrUTx7m2XyuO88n1m9wkznA9xJkjD/IgR9aAjMBIIJAQoAFJSEJinns65+yhqtZaz/vHWlXnnGZqcRq18Klff6r32bX3rlq1qp71zM+jRGohOrZAx81vEEAElAIEooJ6DvsHcPgw3PYVuO7ae7jhM1/hrm8eZH0iRD8EVSAiRAKCR+kadAWqRkTwrNCjx06G5RBKKZACYonEAoVFY/L+Gm1nLIwVZzxvFxe96kVcctnpvORFsLwMe+ZQDEALoDboVAGwiY6j3nJedbSE30FgVsNkLfKrv/dZPnn1bdzy+VvRssJgdBLzSUFVW0q3mxBN+omKoEJH+EKFiBDUrmM2gT16PBth5CBKKRRlR/iIQUkiVKMDVXOAsvAMxjXz6UNEdYiXn3c+l17xEn7mB17JeFEzLGipHTgKwo8iAjUKBT6COEBDA5RQB6BIbz3wyGH4tX/zDf7Hf7uByo/bowCBoD2okAgdEAWISccTm44tFkgLglbrx3QSe/R4tiHKQv4rgPKgmvRKZpaZ6yrRIAYTM/3khaG0E/7aX7+Iv/sTZ7F3GSzgAGooDFC1O2I6ttUIgvJBxOgGAGkCSg/SQhEgKNAFrPmaWfT83h/8Ob/6Lz5INT+N0JzZE36PHtvEsSB84+6kHNzLz/wf7+YHvv91DLVl0RbEGoykr6NB4hzlTD6eBPF1AMA6Qz2bYYdztDJ4xtQ47rkPfuEXvs6H/ux2pLTM9MMoI9joARDSYCIWxCK0Ij5bLkqRFoZOBAlLz9yM9ujxbIBZzX8kwpZMQy1z7Ag/05DGAyHREuC1RYJiGE9EVZ53vPEc3ve+szn9VChosEyIEvCzAcVwiG9CPq4EQXS2Ckh61WvUTUW0S9x068P87b/zH3nkkVOZyWlUKhKGh1E6YkKWFHrC79Hj6WGbhB+MQ6LGzJYpRTNU97J37338xq//KK84/0S0X6VwJcTFZPUTBUqhQjUXbUtEwVymaO2YYtBo/uRPZ/zCL/wehw6cymozZ7yywHo1Q8wMmDOOzcYFiCGiSVoGGyL+JugtVkKo3ewYzmCPHs8+FM1wy/uojvxGzMwSwKO3vIeJdsAAFYYslEMmh9ZZcgNWdt/H+973A7zre4ZEIiMCMTYM1AgloLVLFv2mAafT3xbNVdd+jve9730cPHiQyWTCeDxmMpnQfVlvJeoePXocB2id6BG20OnBgwd53/vex1XXfg6bGbDTrv0qSuaVUAYmoQKzQi1w8+fhB//K/2R1ZnCDkujmNM2c4CvK4ZDgFTE46PzwrVEvi/LK5/0xnwTAJo4vltbZYOQIEaBHjx2GoFoWL6B85vh+k5qcGazY7OazWZrOkjWH0KbBWKGazTC2xLkBuhnQzCuWhoHfff9f5YLzoFBAOMTYlGisBYTCFADccw/8+I//OlVV4Zwjxsh8PkcpRTkcUs1mKbCgR48e3xVQSlHNZpTDIUop5vM5MUacc1RVxY//+K9zzz3pu4nOBSUzkWqwyhqROSv8nb99C1d+/FYKu0QkgJTUKushxZ0AOD8CsUTVi/s9ehxPaImgPI2dph31mQAUMgNVoTHUfpU3v+l8fv03Xs6AQyyi0dQbB/nDP7mPG264gbIsaZrmsWfp0aPHswpN01CWJTfccAN/+Cf3dfuVxEbWlOXhNXjD2/8LD9xbgRpjjOkCcWqy280cAqDwSS0IPcPv0eO4wmTPeG0zBw8rABQkN6ESTQgBZMK+00qu+vDf4MTFbDnQwPvffzX33nsvw+EQY8x3evw9evR4hmCMYTgccu+99/L+91+NBlQdD8nd+5d52zv+O/cf2EOMEWzFfL5OMUhGvIZhtiQmFDEtM0GHxztPjx49vkMwORGu3uxeVwFHipGp58JgsAC+RGvNKbv385EP/TDWKsuVV36LQ4cO4f0yIQS0ClhrgZ6we/R4NsNaSwiB2DQYYzh06BBXXvkt7CHGfOTDD1KFU4hmgK9nlFYSh29T+YxPvvlY5sP1/vcePb47cAQt6iq9hhSMp6xCKcHPNKoYUIVT+MiHH0RP51NuueUWQgiEEBgsLNA0DdIH1/To8ayHiNA0DYOFhY7Gb7nlFuyHPvRNpvMT8Bp0MWPerDIcWZrpHNRK/nkO1VVtvF+b4N+b9Xv0OK5oo2Q7msyvklLmJR6iHA2YzR7FDhy+hun8BPTdd9+N9+nHqdSPJD2/j8Xv0eNZD61bd550Ebfee+xtX57giamIhvZgakIQrFaoJhfMyEn/8YgYfCi+w5fRo0ePrWg5fqLRllZVtvbjIj4EMArRkaDBE9F33XVXtuAnfUD1PvwePf7CQRnT2e2stdhH9q9iSlC1IvgCrTVKrRJDxOgpqcxPW4wz/VBU/fhH79Gjx3cU0ubLSNHuSK+6AgIxRpTRaMZEH7GxwZSg5/M5ADHGbkXQWvdW/R49/gJARDp7nYikAD3AxhgJzNDsRlggNBFbrKMElM4VcmTliKNlHb/Pzu3R4/hC2rz8LJW3pbrUofQaE5mGZgGtNZp1QjyAbrm7MSbF6MeYxIM+575Hj2c9lFKJy8fY0biIYCUqprYg+gnECl0orB+mTjc6E79KfvzCp7x8b7P7r1ttevTocTwQdKLFwieO722S0r0kWjVRUF4Rigk+ruO1p7FFH4HTo8dORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQPSE36PHDkRP+D167ED0hN+jxw5ET/g9euxA9ITfo8cORE/4PXrsQNjjPYAePXo8PYiuAFAC6BnEMdaPQaX9xhU0IRJjiaqEojiMyBoE2R7hm9CkE+sVRATP3YxcCY2g1ZB5tEQMtRXAQBhTBBiEGeiK1UG1cSzJr9GgRINYELPlfMGE/JdPF77ddUvP03HlhPx+FRXBhTKNpfR472nMAigFzNHiKWqPiBBtsb3zEwEoAyCWuSkJCqR4GAA7WUQLFKUihEDtFEopqNex1uL9QjqMfSi9yhDiGO2X0tHNJD0EepY+xuXzpnkcz08EoB7WzOvDaFdRFAUyKSCOQRUEBb5Yz8cfAaBYxVCh8egI+JPS9Jn96XNJ1yXhJGKMiBa0FpriYZRS+HoFay1a1vMsWMAibL3fQk0IgbIsCSFAVChsejYAUdN0Xmmnc5heVQ26IprVfKASE0pUHGIiGJ32VwaCBq9dPma+78HjYsDqhqZpUKMRMWgaHymKAt1UKKWYqTwf+nB+ftNzK7h0H1UFIqDL/DxbCBHMhCEGWyWBO+iGoCCQx28fTdflV9K16Ul6H8bp8/zea53ornYo5xDtCSGgdUBrTQhzRCcqiTGicUQ1BJrtUU4IAWMM3nsGg0F3Q6y1BC8opVAoUADpoVWK9PCq/BBntH91v+m2DWx8/8jXp4kjj7d5fEDTNOmBI4AxEANR0jXHGDPZPnOw1qKiEEJDXdcEZdDGoETQWm/Mx+br2DSv7Tw/5jrzq/cenR+e8XhMQKjrGituuzMLgDEGpRSiBZG0WIrIlvv+ZHDOEUKgaRoGgwGhifgmYo2mrmuMe+pjbAdKKYqiYB4CRlucM9R1jYsB547i5MaA96iyROYB6hpdlKA10Ue2q2lLfg6cc2me89wqpYgxPuk8b4/wncUWSzRzaATwy8x1QxGmOD3BSI1RHlFJMsBYtAZlEqcf17vSfpU5uUqcvOMYeuvEtCu7qPS5C9ubOOfTuJrMeTCHMAKmPb8Fxo6JL4naEVVBCIYQoKoq7HBbp+8QcECSjpQAIUkSoZmmG1oo7LhgaE6mrmt26YZ6UoFNnJx4IL2KgzgA1tL1xUmaW8nz2nKMDLMypVKRar6bqjagBmDHGL1EnFVYdQCrKmxI90dimhcrACWTYgVUCTbfB7WS72F7o9ZBC0rr9FsZglIYZ/ExUkiWmBRA7BabloHXtacoCpCG4OfU1YSiKCjLBlRFTQFiCe0D3ko2OhOVnAQkydFrQMd0cLWCibAwTxJGY5st8+JIkkTdeOygpAljGi+oIkKpURTMZxWl9fkG5uuPi90xLGDUISaTQ7hwgNJYRI8pZc58MkMpxbR06af5eUbl+ylZQnBNknrjctpfVIDPsj1oHwgBrHGEkOZAa43WkhlWO5J2YnWalyQ3bQ8xRpB80qJASWTPyh7e9T1vJPoZKE/dTqxYjEAZE+H7+BSEr7YSdsthjxnhS0v4K2nHEYQfjVAr4ZpPP8LXv/5N0Aa0RmvLaDSilnpb538qFEVBjJE6epqmwav0wLzjne9Aa00cZtHYPpJeW8KPSQXQKhO+enzCr5ly4+dv5ivfnGfJIIIIs8mEcTHgmIg0It2fypiOK8lsBuWTP34iQoyR4BuMMZRlibWW1f37GS0vtxrLM4aFhQUOrB7GLe1GKUXdrAEeMQZjDBtL1OOjaRpOOPFEZrMJvm4gBJqYuHRRFMy2OcGj0Yj19XWiioho9CZG+VRS1bYIfzEqwmwVbwuc8hgJhGnFqadO+eW/v8zKcJnNalsg2wSIGMDEMo8yvUhe+VshemNa25XqGA4eENZJgvxCHsYYs+lMNZZ14Bd/ZZ377z9EI0OCt9Q+YnQJartOkXQFUWd1wibd00aFiZamGqKUIoxrMFPEPMKJS4F/8suWvaPFTeK4ydfTHtPl6xEgoPN8KraKKKss89M/t8D931ilip6ga0TN2bWgeM9bLuHv/O3XUbCKypyoXWd1tFveq3xfdczib16YjTGEEFAYRDQFC4S5YJTwwP2P8MafuC2PJJA4WbvwpwNrFEpgVA6I0hD8lFoqlveW/Pw//mHe/cKkC7cqZrQH8nymmYhhT/pYedAV6FbnT/PgdSRoiNlIZvxi4rZEkJJZXOGnfva/c8tXDlOLBhWxdoiZpwUMk21EWifOnInNskqhH+DNr38Of/fH38LiaEasG5xJ49Q2qQxl+4Dn8euW4/u9+bbm8WZJor0+IZ3vXT/xRepKUMoQURhjaJpmQ4Lo0D6neb/o7dGOiGCtxTnHfD6nMGC1pq5nlOV2jvzdgUgio6qqmM1mDBYW0coRQp1u/LFQhJ8EnR6vFFhL9DPW1taSsUsEe5S68pNhPp9TVRVidbLXRKjrmhNOOIFzzhlTMO5MBC2DbR+j9r06Yv9myKbPTSt8KHB2CNz2OL/YgHOOpmmoaw8qUDgHOrK+vs6ePXDWOSdsnATArqS3reSdByiqHdy+LSP1+RpaRmOOuIJZPq5SCqNNJz6LPDmnb7Fnzx7OfekSliUQsCrZ9lrG7DrCz6NqJyprEJgsoWV6jXZh4+sC4/E3ETkASCdYtXaU1nbzRHiahK9BeabMKF1J5WoIHu8WGLoxenAID1iTV7A8ctvdoUE+TKsCZGNUnnjzRMOSTRuPMfp/21Disj25Pb5NQ80r71BrlNK4+Zgi7CbMVrLVdJQntXr8Ax810rwElTllVjEKn1Z0bWNWpSrQBm3GLJsTGU8bylJD5iDoTZKTbHp4VebwRzxgLayG5YWKoVlhTZJuHrVG7ByMxqjkbVExHVtnW03IEkVBp25uPb72WZKyRAGlIoKAMWidyC4WD2yMVbVcqlX5Iogl1orSjgi+JviaOqxRlDAoHcvLIK7lbFs5WlY8MZvXRYkbnDDq7vrTb8KW/aj0SIrAWHvwGhUbnG0YGCgLxWxWU7uCRttsO1Abao1EShpiM8PWMFQbxJ4G5xEEpTZJSAJkyam7n1kSCbqV6Nql1oHSRAn4UONsSYiCQaN00khFAo9dinUap9qmWdE5h/ceaRr0cEiMkbW1ZFiyf0EiBEJMIutwmMVD75O1/Rhw26dC0yTdFq0hRmJVobVmNpsdkwlO3CdZyFvdOzZNWmyOEVouJnlVaG1OR8M1tdbEGPHeMx6PKYoC75PLqtrumnsUCGFD6hoMBhRFwfr6eudleCoURZEWutYcsOmS1TESF40xOOc6/b59LjeMe4+Pp/n0RBCNxN3EEMAGYqOS10uXQKuL5AUuDNNqutmbFMhWSkCZNJTHeRZiCOjO+Ne6piyIoDqZ6OlBVFpZo3i00qio8xhaDqwxGixjfNWATS62Oq4jStDHXNbfysGMMemGVhUUBaoY4H1kPFpO3EV5iEkfpfUOBTbu6hHzKUcs88MAbn3KOA6x2jKrZ1gGFJQ0VYl4CB5MbE+TrNB1A86BNfvT/YhjqM3GYqQ1gYhvYA7gNBGd7DoWqgAz9TxQt2y67k0cWdLzoFWR3HZ6SDXXiDiMW8BaITZwKM9T+5xp0agAhUo7SwuKCRuS2RBimc+jqQSC6KQzb4IP6VIqDXN201DhvUJspFhcpFmfEWLEygI6QmMjUcVO/AlAE3cz9ycxD1mQa6WISJISgCUPRkNgjlEhzWUIRBVQekTwZY4zyLPU2gLyIhJjxDnHZG2NcriYYibyAm6tbQXIx8X2AnhMMlIA+QEIRGmtsSBGUD4kl8+RbvmjFNP141lPYyR6jzbbIzwfPNZYtNKEGLC0hC+bfN/HDyLCdDpFnbiE1DVSeUQLVVXhBnlejKGZedwg30oDMchRzY1SGxytrmu88RinqOZzPv3pT/PzP79OnFYUajFZ4stDTOo5w9GIiy66iO97xwkbirS14GN6koEPfOADfPYzBZWKUDRU9YSy0OggWDEc2D8BTn7S8dV1jbVpkU/cX6G1ZjJZ5f3vv4mrP/y5FFMRQOsCHR3SBIa2YfcuzT/+2b/xpMe/6qov8OGPfppysMRsNsNkr0PkMM45anUO3/rWt9D6NLTWNJLmfjEvyOEp+M4NN9zAz//8Q9g4R+ma2jcY62EE8/owu4Pip37yb7D3ZJ0NxVkdwrC2PuefvO8/Z8LPXiYZAjYTvmH//jIFGJkNYkqcP0lJRj9xrMH2jHtTYcCAKJHQ1BgNmhkmJhEvMkDZbKXdTLt6P0gAlmmjpTpml1dHiJ0NQIJPvmBVIGJQBpQptu1uigbSsjVFtKBwae473SsNO2LSqZTPfnGdOe7RGXmeCkYSR4pZsqltxESLDiOMLajXJ2AalG2o3YPIrgVqHamZM8ChRsM8vRFFQOvN/uANK+vmpSAoWNXwwGiVg6NAnVllNJbGDPnktw7zmbtWk/hfD/HeUyyU1LXCWsMFdwXe8I4hQ20QCpxOcRcKqNFM9Sn8t9/9OnVZMtdC07hklPSKQkpCWExPnwodB96wReTIPBNQtsRXdZKUpUCixmrhqqu+QsUY54YdAVptcF5Q6g7e885zWAMGjDcZ7YagIWTPkV0+l9/9Xx9DZA+rTcANDegKRSSEKTHeReQUPKP0rBUG/Iz1gaeoAmOf7xdVinDUMUkUskLNCnfcV/Otu1eJUWP0gCY6MBrvakKYcempM/7BeEydb0wrtM2BD31ylf/4+5ZGlzRKAzYdGzBqDQjUbkqMAWtHIIoYJAVNYYihadfgTdiQSral47cReyJCU1UpDHOTNVEQYpY3QtjQ74As3h8dlLWwKVKtO5ZsbxOgDpIMLZksYsxP3zHUc58u5vN54nibou+ccxw8mAN0cDTSZKKAqs7GoHj0KlBrBcYYKApomk5k995jss86xtiJlvVsxuc//3nm9RyVTbKySUgSgYsvvnhLNJnJXKnV2Y156vvfugPb50kp1YXwNk2DSApUafX+EAJKKZqm4U1vetNTHv/882HXrl2dLaU9Xoyx05GLokgPW4yJs2qN5O98O/MbQor2ExFC0+DKkgsuuIBRivplsylOA9dcc00XhfdEW2u9b2muFfXbuXsybI/j75px0K8hWsFYsa6mEGasmdO47T4ohoaq2uA0FmAGp56xh2W34Z0XkoSo2qvOlx8oCSQNbf9hOLCWdMSooK5hsE03+gkeTj5NkWywPnnAnQI8RI8oQ0QQexBxj4BbB2VRSiAWtLHrTxsqyRs6DAADOfbe24N43bCwVDCdPowbWJrKo9UpPDIT3vnum6jrGYddlRbeeYNuAuPRA3z4f/3vLC/upoBk1W6lJwKBNmZfEzAYhizWL2LUHGDdB6wZUq1F1DDgtCXEk5nNBOUUdmGMZ0YMEe0KdB357I2ON1ziUJLun2RXlVVw6smWU08bcccDa2hT4mVAExeJKtCYCVortISkq7I156Fl/EHmadEoNUKDVZamiVS1w9hlol5H6RpkD0obJE6Jep1ydJBXXzToIhpU3Ord0EYTgKGD8y8Y8+EPLyDWMlcemgEUY7RVqHpEnCsw8yRC1wUSS5AK5QqqkI4b8300MQINIccRzFjHDC0hCsSItgViBZgS9DpvvPw1oMBwGEOah8CQKPC5W+6hssvULKVcAgDbYMSnnATlMcZ3xL7ZhRdj7BayhGxD6Z67uD3Cb+oapXWy9FQVSGRp927uvvsu3va2f8q8+SZaa4aDk/EeYh1ZMAW/8L5X8CN/6Xue8vheIlppBPid3/kT/t1v/B4HDgpucGqKla7XtzN8Xv/i0/mN3/5pxssKlw16TSPgZ7jhkMe1Nn4HMZ/PUxy2Tau3ksQB77nnHoyB2Vh44IEHGGpHiebwofvxHpqQVK3HinpbESKdhyI0DUYGUBSITAkxYIyjrirQKuvSHpRKYwrw+7//+7zxte8lhmS42hxhrYGLLrqIb/zhlZ20kNQ7ntLH3KKNE1FCjs1P0kdT+86SrZRCt1JJI3jvecE5z2PXytHN8cUXX8yHP/yFFPgyNOlZ1h7xEclEZUc2ceqqwgwGhKCOzithDMH75Iq1NtmlrEWiEEPgggvOJsaIzfaYkN11X/0q3HPPPcS4mJWSNqQ3oiQmqVTFHLEniES0Mlhru7neHMX3eNgW4Q9VQTULKF+wuLiHyfoqa/fVODmFUJYMh8+hqioOryaL40Jhma1P0ZyBCAxUzDp9+9pa79PLiJImplU7zM7AT1/EuHwOddjH6voMO5g9wciODrZaZ9cIKlIQy1J5AsYpUKNkWe6Cx0sIu0EPoBmDLCR51j26rfO3MMwBi0YTNIhJHESZZZx1zCYpG0+Ga4T5nHqhoKoqvF8CPcSMR1Srhxk7i1EwMDAkR9RFspXcYZXb4tMXBTE+iuMAAxFsYykMBKkIMaDjImVZUqlVQqxBWUo9wDYGJhU3XP8AdZM0hBgrtPIQA0LEKcO73nUmf/ChdaKyOG0QnyIRnV1LnCm0GZjZOt8ZIVKkj9I1xirm83kSiAClHKYoEaUwYYIWjQ4noWKSEJx9kLe+6UIcUBBzeMCGfx4dUcywwALw9tes8WvjCfeuTfHDBZRRKFFI5RlblVz0TQqJnvslBt7T5KzUyXDDpacETGwzB9OFtCpSqQusOGJQlGLxjeKVLz6PffuqxKllAEoh0RGAqz/8CHF+ZjLRqNA9h8ocyqavJcDgY5MW0WiIEjeSomSzu9TTWdJVzC6GI/0Y3yaqqmJlZYUYAocPHsQYw8LCQsqkCoG1tbUuxrodSAih84kfDeo66Y6tB6GqKpqm6eLYt7M1TbqBBsO4HCOSLOIYsxGMcRyhlGI6nTIapYChpmlQ2bfdZYcVBet5niFx3Tps+M2fDFrT+fDbmIxWx211ZaCzd7T3oK5rBoMBhw8f5rbb8hzqlL2INlhliUTOP3/DF9/aZ46c+ydDp7fGyHA4TJb1/Dvv/WP03fZZu/TSS496js96/lmceuqpDAYDYgiEKhFjURRpvvM8tP7yzbaEp0L7uxgjk8mkux6AK654VboH+fP2fsQI11577Ra7CnmTI57f9p60c9zuO5qxbc+dVw5Ym69j28AxH2mIVMUMCtBhF3NvMCYZNqYqoJZL7KzKsXs6RT0haVHKVss6x2wXRMalJggM/JSZe2m+uFUCoLYZK39w15jDFgpGiUNWJLZTTsA3RLPA3FtMVAxQNLWhlgniHsIaQ2zabKwUZ55i7jcpCJKy7lSOYW+zC1XmaHUWx6YuAp7YxpLnWPiqWIfCsCYTKCwKj8JSSYmJMJBEpNoqGmko1AgPDEyVVnQpQZIFn3xpKLAq5wTIEoVZ4OCgSpyJhiiCYjktAMOGmoYy1ycIapZSYY1hPVYody6/98nIRS/3SaS1S/n65gxxFEtwyfkH+cjnXkqIi/gguKJgXk0Sc+ikvJB/twmisWpEbMCZBZp5+oa1GqFGG5irFQiRZT2jqirqYs5415i3nu9IgbgK0YqmgYcfhpNPg1kF5UAjCIUotLJcdFnkK/cfQvlFJC6i6gFNEzBuzlSv04wccwJtKGDJClGAkBbbhZiy+Zp4WrLu59hkVw0pCkNgDkUK8a58zZCbef0bf4BaQyEeHYZQgx/AgzVc/a0DNHoRI0PKSMqVUJ5KJyk0mpzToAp8AJUXPY2k+JZMP0FZRCxBWRQRIaLEAH5nl95KluFNO7pYaZ90PWBgE3eZTFLxgy0r8Q5H0zRcddVVBO8xmyIJN0eltdZ97z06J5G0EuG2senmtTr/eeedl0RESfo+JAHuf/yP3+HwYRgONNNmikIlxiHC6173Og4fPpykpkxE9hhERrbSQmurgGRTOfnkkznjDJ3DdtvMp/Ry7bW30jTNU+ro28VfkMDap4dRGSg1aCqmzZyxLGczcAM6IhTJ9FAYiuEi2i3T+AbUgLqpUEVaDIgLmLAAfpAqsaiarvKNqggmfa9RSadNGpZlVJukE6pIl3ggm25Jl2UVNmII2vckv7GotCmqFMEmoCnbAIRk/dVNfptVrJg4s4Yuxfnbgc72AcOAL9x8J/fuLzjtxBSZd4Rrhje97QJ+9df+FK8FKQxxnvIAYgzb5jpaJ6v2XAJKBBvv5Z1XvD7H3AuFjVRxxvp0yNXX3cdJZ97OX/6hc1h0C0jwYCwSHedfCCedOufB/QOcgRjXkzDaZsu1WaR6tkWHb0tctdl+6FVS4ErOPdGaEASjAkpDqGtGtuDc809l1y6yI1RlaTdJZn/yB7eDlEjUXe5KGymr21yCjmyffuTqjub4s9mM1m0/cION2TC202ubSLcCt/ptURTJv7vDYYwBY7jpppuyQSntD3FD5Tnr+XvZs2fPRjx51tOPxo9/NGj1+5jtAK9+9SntBwiC0Ya774Yvf/nL3HLLLTR+43eIoDSMRvCa17xmS+Wio7FBPBVau0Mbf9Duu+KKK9J5Nis3IQmaN998c+fvfyaxownfFQZRUOEIlIiDOpLiB/SICpciKcuGqOeoooKyYu4PU9XrxLCXGPYiqkHMOriHwT6cJAZxEJbA70KHMZJMtEQdEaURFZkWFVUxoXIVVTGldlPqYhXv1vFuPb13U6piRuUaps4zdZ5JkbZGlURKotKIbtJ5yTe15fgiwAzFDE21ccPbAKinwfETB1I0NYyHJ/M//+ReZmQ+KCBRk5JcPQ7Ppa/Yg6keIjAF1+TIsu3cuQQVAhYILtCUgXOf33BBm3mrIOSMw49cB1P7Mj50zYM0BsJkimnzQ/L/l73OMECQpqJwDdZsygKSQdrwGOaICogKKFWhVEWQEUFGOed/kvYT8FGjxAIaLRGjJgz0hMuu2J3yFvL/GKCAW26FwwdPQsIArW2K7SdJV8njYbPdxrDd1NQdTfitnm7R1Dnu84lUu+k0lcEqy5Lo/Zb46J2KlivdeOONrK5u7N+sHwcCb3rTxZ01nKzvHgsdv40HCCEg3nP++ecDG0GXRhkE4XOfu4UQAocPH+bzn4diNHpMZOZ5553XeTdms9kxkeg2B9S0lveTTjqJk/fmyMgcYdky949+9PqUBFZVx0wieiLsaB1/Vr+Mm78Iu3ZDbCyDCPM56HKYco4cHJrCbL6P0dIpNI3Gh43wUUN+2ts0bGyu7bY1Z1QJKLEY0ZhgOj3e26qzuJuckm02pQC0lXOCirlqa8wl03KFIj8EiUnM1mQ7QI7RaqP2xIEs5f3pvEZ70CnbS8Wn8whoUIIuDJ7A/Yf28cmb4Ife0M5FirvXeoYDLnlVyXP3Trh9BlGEEA2o7ROWo8QHD2YKg4b3vOaCFANok0ATpGRWwSduupdVTmZkIn/ykUd540sWwLo0aQosM1743CEve/6Ar959kPl8BsWwq/7beWMk+aJE5zgLAcQSVTuHGiMbORfKDCAKKoywoaGQNd74xl2UeBRCWpY0lYL1Gj7+Zw/i5cRko4iCIhA16OwtUtJmsG7fsLyjCf+LX/wiP/RDNzOZfpOBKxjEMkVSDdeSNbYomEdL8C8m6BWaJiJW48qSpq63nR34bEcbGuqc49Of/gw/9IZX5cWGvNCktJPdu+H000/n699IAmYzm1CORkS/PT3W+1S515Ulo4URr3rVORtjy1Gf11xzA1VO3m+ahuuuuw5+9ns6Nus9aKcpKLjkkku49WsfYDQaUdV1FzH5dBFjxGqDRIXEFBtw+eWvAjyKVNWnzRM5cGDO3XffTWAvRTE46liBp4sdTfiNOYP9NejiJHyEqZTJMl3NgECssz807oYI1kZQgRhqnA3YJoWONn6FRiIRAWfQxRq+qsAYVNBIZRmbAiUTnKyizUGsPYQ167zg7L286KXn8Nwz9nDiyQN2Lw9wRQp0Onhgyv6HG77+jUN86bZH+ebX11hfW8DICQQNh82DDAYD5tUMyyLG1tQVCDk2QpscoWdziakE0+Wnb+/2hzjDWIMyS/zpJw7yK/8YRiqdSGkwyjILNc7B5RefzJ9/4X70YIh3I2qvNlVkenpQMgAR4uwhXvP60ykLUhGbskJU4vgfv65hpgwYRyzG3P71igOHLLuX8wzYFBrulOW1l5b8p//yMHN/Cs6NaWIOlc517PErAESbY/Pb+Aad3YYh5W4YpqTiFDCrPQNdoH2BcbdyyavAEdAIUTRaWabAVTfcQ2NOY72qGY8t8/k8x134lOsP6FwtOR6D9WBHE/520Vp/Qwwok1JSQxtpZQzEiHMlWg2gDinsthYuvPBCvv/7X8db3jJmcSElKra8pa0+4Ak4TKpvQIqr3/8wfOaz8ME/uJcrr76KheUFDh8+zMLimGoyo1FNV+swhJCi6Z5BpIo4Fc4YHnzwQW677Rtc+OKzUo5AfjgLU9D4ZDXXv/FHyRHpPXY4BL+9KsVtIkoxGPCyl70syfeujVpMA7j11luhPhE9GNDUNSYEPvvZm3jzG16REoQkYp1lnZoLLxwzHA6pK00TwreVQfpEaP3xIsJLX/pSXB7fkRV4rrzySkI4gbIsmc/nRxVvvx3saMJvisNA1tW0BdG5I8oYE2GjBlp+zb50jQcBG09JpbjKGbqAKlZICNCMMSpxtGr/QVaWHsb7u3jjFS/m7/3vP8KFFyxTSPKHpzr6bOQsmMytIWUIhgC2QGnLrn1w1jvhHVecwEOPvp2f/7WPcs3H72E6cSw6B34dF0mcxDjaqrXhMVWKj00lVJGQEkbMApPZjCs/tcb5L6Xz50dsqpRrhJe8vOQF+xTfvH/C3BQpXXeb52/wxKZheXwn3/eaM3N+P7SyxFfvhFtuEyhDcq3HVMvvf/zpQ1z2xpSTo3Ot+bE3FItw3suFT16XkpFiJnytQnoucgmj0NpK8vs6d3gyWULQOemgivkGxwYTG9761lMoNRANWhtQGolwYAJ/dt2DVPbkZBit5hilcoxFrjzU2X48x8Imv6Ot+ttFmysuuTJLGz/eoq5r9u7dy/LyMv/tv/0L/p//50c5//xl2mdQtQY4RaKWdoWPsS34hnIuZUAKhGxYXFwccOaZe/lX//Kv85u/+f/l7LPP3mQ5bnPjn3n7Q1t/MMZIORhwww03dJ8lwlYpy08pFhaS5bzNpjsWVv3WxnDSSSdx9tntoHK1GiJXXfUtQggUoxFhNkPlLL4bb7yR1k2f3flYm0LD3/KWt+T9x2D+NgU3OOe47LLLHnPsEOBLX5pS13WXi/CdqOm4ownfBY0LGhWHXc52qgzraJSjYUSU0YbfNJYQljr/fT2o8OM53iZXVSmLLKldjCrPeDbjBHcvrz73Ea76yN/giksqFu2EoZ5gG3BZHBYliJKNBQCbqqyaASE4vHeIKNAeY2pQExTrKDnEssAbXgUf+v0f4K+953QW7e3oCEPtAU/br00RUfjWa5xyAaLtIvC+fSQ/vpIRmjF1M8NQ8blbHbffDagmx4trjC5biwOvv2SZcbgXCKinFT+wFcrU6OGM91xyBns0Scx3GsFipeBDH38QBnux4sAHBnhEr3LXoydwyzeyjzzEJHmFVA33sjcs4lwA5tkvX3X3X+lVlJ4QxRHFpbgJ1WT7vCGaCUpNUGJRcYCyCrSg9TonnrrGi1+QqjobLEp0irI08MEP34kpXkRjK3y2v6QSYKlWYZQhUYb5PsZNfv2njx1N+NtFW/zAWtv1F2iapvMDf9/3fR//4T/8GHt3Q2nKLq86l5ED6LLLYIPRt5+ZXL+y+1xil3VndUrB1RrGY/hn/+yv8Tf/5t9MHOw7WEdgs496Op1y3XX3PeY7IY/n1a/e12XqHYtcBxFhPpvxmte8pqvu1Ia+i8Add9yB9z6l9Vrb+fyttVx99cP5+1l8b9J4Tj35VFZWVrY9NtjQ72OMnH/++RjUY5I+qwquu+66Lq+AnAvSc/xnEKWPeROcNBhmqZ6ZWQWzijaHEHuI2G5mRsxx7wJ48wiVPkAVxoSwSKwCYXaQM/cd4Ed+cIX/+5+dzckLUISKAZEBQzQF8+oQSlcgDUlnS9l9ysRUS1+nuO2goBZh7gMxWjRDVFyAuECYj3B+PwNWGZmADZ6f+wdvYc8e0EwgHMrObNDYvOWuxOJp++k9PWTdMwwgDnG2xuiAmGU+8vE5UCNUtH4EQVFFOPMMuOBFSzmX4RgQvq5Y3iu84vl7UrMK1aRN4KbrDvDQekmIA3SjcBRY1jHKEzmZP77yYepYAxFpAsYoNIcpmXDpxeehdI3oaYrQkwIVCzBrYA4hWASLokZR51gJB3odzDoqOpQoQmjSHNgZb3772RhmKJX73+WiOLfd+iD337NE0wwQLaCb1F+yjeMXl6L1YplsDF3/u+2R7o4m/G2jLJPLLq/ObdfZ173udfziL74ZSKWaXW7r6kPy3w4GQ2IMXTKHIIQYuvqEm2G0wlnT5Wq3PjlT6I5bARRus51WNpptPINoa+ltzpH/8pe/TBOax1itXR7q5Zdf3nHd7cJay8te9jJOOpUcM9QGV8EHP/jBVCA051WkRihJOmuahq9+9asp4zIElDNgVDfmt771BdseG5DKbRlDURRcdNHCxpxsYvuf/exn0/PTViXKuv4znf15XKz6jY6YLlY8JW6gPOhDABRxJdVvp0aUplGWdfcgS9UhJrFBD0GpiK3TA1frMunmuXuDjQEjnoHSOR20IHqHH41Z9zotd2WZi75DS01KWmvtkSPeHGUWUTrlX7N2Qg7muY+hWmNoIxe8+ER+9Z+fx5JtgCr751ItPWMGuXq3TTTvBUjVc41O/veApRKN3UQ3rYtPm1ypqK0o45I+aMPSRkpxBGyOMLMz2i68kCMBFWm+jyyy/21BA5FgKpQOUHjEKKrqRB44WPDxG4e88eISTYOJFaMcFy8B3nj5CH4zEF1MdgvJjgxs4m5AMCmiURlNqCLajtBRQHzu+56SpobhXt7zmotSAdrQYLN1/eHG8YHPacQs0wBSBwoNTZ43X1o88LFPFfzlNzosa8mKzxCH421vgL2Dr3JP/UoAity0cyq703xnPbzWyS5UxlQCLsoJ1Apimd7rpmTBRy46P3LqLpA4SB6ibIO5T4b87vUjRH+TJRaJ1ZBG9hClJNKka1Ye9AzR4PM9MzlLL+invzh8V7vzfPCI0XixPPe5z+V1r3sha77Cm5oQasZZoXsiwtc5wEYw1HPF1Do+dd1nYWkBjkH2lTKGpq4ZjUaYaoazwi/90l9lVEKI86eseZeq5+oUPmYtPnqUtl2PtRhhMyOPIaBbIS0ATqXiCrCRlNO5njd82c8UWh12c5Wdqqr4xCc+wRsvflsac7a8EyPKas4++7mMd3+ByWTylOJmaBpsOSKGJE0ULnFskdDFwF944TmIkPsveMR7HngA9u/fD+x90uNfffXV/NBb3pHug/fgytQawMALX/hC7vlSkqqkyiG6mzIBj8bHXhQFzXrFueeeC2zkNrQlie+8E+68886U8WnTMUMd0CZVWPLxmevGfFwIvwxQb27b3Q1lBUP2bgUYmQEpF33GD3/P8/j+141xo8SsAjDKC55X2RWen3NL4to650t7n1xidz0Er3/bH7E+PZ1ZMDTbDMl05Yz68GGa6Chkhb//D0/h3HNT/3ijB507/kj6UzmLTrTOHVqWEWAiadxXXg1//Mef4e57hQfvP4iPkZWVFZ7zvII3vvF8Xv8W2LMIS/EkClJot1WCMh4FVDNFORh25a43uuVuqj2nIjFblp8uREWCREqfOJ8bNNR1zcc+cQ+/+HPJu2AsIJbQREwJ413w2gsXuPra/XhZSAE9quX6LWHkmPcYcaag8jUQUjReneoBOjSn7hNe/jKQGlSpEQJi4dOfikzWR0jZ1mQMWadO8QsqB99//OqvcHD6DnaPLCiNweFCWovf/paz+Pgtd2Oco44NoAi5VLhmjtWWIK0k2D7MESMgOXMu+BrXNFzxxr0YBVYnnd3HgDWWz9wMDz60inULhKjAGpQSRDySu/PyDBlqv6s5fgzZOmUiGs1gkKVjNoJEIDPOjbfp79ZZrnXy0UYYDmF1dZWIp/ERtkn49WyGHo9RdcPznvs8fuRHLiJIp7o/JZRSOKfxpHTgP/iDq/nN3/gT7ri7Ak6m9iehGTKZzXjkkUe476FVPvKR/8Yp/8bxfd/7Wv7Be7+XE5aS5B5CSJcjQnkUfd2OBVoO1nLAtnXT/fffz913w/PP9FgshIDZNNdvecsb+MSf/8enPoHWXTy+KQqUijRNiqG3xnLxxReTU/zTeBA0mg9/+MOp8+9THH7//v184xvwihc16KIgxuRFCcDrX38p5v/3u3nxMd31bvbCPBVijOzbt4+XveysLfvb33/qUzeitaYoCmbTiIoRawtivm71DFLncTHuRcqcgjzLW9VtBt/Vg9fKodUAHccQhxgNzkNBnerD0RpH5yjmwBSYIswR5rmen8fjmQATBb5U1KMR5crytq/DaIeOikV3gJ/6yXNYNhWLqsLQpMKT+fkIkrYIKCpgBsyY4DkMPHQYvv+vfJSf+9lDfO3ONzPx38O6vJJ1VzJZhHCiYzKqeMTvwi9dzl37X8ev/ZbhDW//Q279CkyAxlgqqlTjXXI0bJ6gzYtiewe2l+GVsvOUjmgjmGaIC2MqWaNW+1mXU/mjD84Qhkh0bFQs9lTMedurYSHegRaHlqSKeW0Q5RHlU+Xc6HBSEqvUzNoYiCqincY6IEx59ztOxTV0RhAfF3l0brjxxjlRxp0fXpRHtAcZggwxEYx4gn0+H/3zAzTlIkiJTjyGAnjhmfD8UxSl1LjSEkyZjIdagWoIcZ68E8TH5MfbMMCGAQt4Ln71yeweVIhMkjYWAF2yXllu/Mw30G6Ryhu8FHgM0aiU3WdySKfym25k8qYcC0f+d79VP0Ks664Nj3Z0EWFtgxn1BP/Sz7PvXKfVXGvNbG2ty9jaDpxz+OmUU089lbe/fVd3LvH+qNi+QvHoYc+73/1z3HTTTYQQmE6T4VCyHhiaJtkjtE412b2HuiaEwKOPPsoP/MA/4tM3PJQXlY3rtk/cNu2YYXOHm7YWIaR5ufLKK9Fk63SyBaZxacvevXDaaac95fHbnPTWc9B6A9rznHvuixK3b9OYdYrN994flQ6utU7Zet0OtkjW559/Pt77LZ11vh2uX9c1r3zly7r32XgPwK233sGjjz6aJJMcAdn+fbSdhraD40L4wcySVd8PIQxRsUyblMmyrny2fKYR6qIAYwhqPW140JLcwTVYEawIpShKUdimRDUl1GN0s4iNlrqCZh3GzrE0XED57btL5tMZo+ECP/KjY0YaRtFB0ChtITRd9ZSW5WoBkRIhbfesO37wRz7BXQdfwMGwj1mhKHYXqFFFEx7CGYHaU+ox47hA3D+lmEd2D4YUdc1UncCD05fwD3/p93ngAFSMCYypNkShvOn8QCfVSdDZF71R+fdpQSR3My5SlKCqsa6glhP4/J2Khw5pjC5yjkON9w0aWDbwntfvw8YGJZmLoZOVWkV01LlevkIpgzYRiRVaItHXaJnyshedwClLDdZEQq6RGIA//l/rqHIPkUW6FUeFtHWRjCnufRaG3PyNwG13QdXmuesZyCEKVvm+N5yI04dpmiHeb7hPNQ7Nxsoa1daMOR0d1juWho9y0augpMGpCKS2UiHCH33kAcTsogoDlF0k6hJBEXNUY4zNhkTRzff2/ffdGI/JUZ5BSEugklZbkxMn4mYZtmP9nQiQ3VZ09QgHZaqtNp/PuxV2uyjLEmMM3/u9b93YqVRqBnAUHOff/tuvdP7ktk9A0zTMp1PKXEvf5T5x3nsWlpex1rK2ttbFdY9GI26//XZ++Zd/q0uFt5Znyia0BSmHoM1r97QVapv5nKZpuOWWu8kfJoml6+EOr33ta5/y+F3VHpIHJWUDesqy5KKLLuqehY3vw6c//enU+dc/dYCSUor19XVuu+3OLQKazx2gL7popavnr3IHIWBLj7onwymnnMI55yRJLMbYxWmIwC233JLqOOZuSe09biNAj2b828FxIXwbUqUab8EbUudXHalztFqXvqFB2Q1LtNVDBAsM0YzB+rS1kUyx3KiIConTDCIhewFEQ2lGFM0utB9v/0L8Ad78ur3sHTYMyD72JoAdAy53rAPNDM2MeZPsjU0sueaGKb/+n2+iVrvwdgmvIbpARGHNbkK9CM1edL0LJ2N0LJAqYAMMGVOEAbUtOBQ96Av42McmfOFLqTio0JCU383IHIcqzVUXR/H0XUZKNFq7Tje3akRdKXAjZtryX//7l6kC6R6pCmVKRCxGhMtfs8Kexf2I32gGEgg0OnaNLEQUQzug8W2QU0NhG8LsAX7oXbtyXYEKY2pqZnz5drj77pOZM0FsnUootX3zIEsevosbUG7APFquuvZu5poUsakrbDmA4Ni3C6545S58FXGmJPiaGBpCKBEZoqJBiaBNQNg0j1IzJPD2d+xmYMCEMVYW0MpSq4av3w9f+GrAN0NsuUBVC9YVQGqHFWKDdRuk+VgbzfbxXc3xRYTYyBZpR5Gqpzb+KPzwbay0pBCWGDf1oztGsdAvf/nL0WzqBfcExxWkLdUPwG//9m9v+9ybIwZTdZkvHI2g8R1DkmZIcxLjpoxEhXWOs846q4vbP7L2fKvHt3XpTd6ntebEE0/kOc/JJ4mRkHvy3XxzamnWcuinQtM0aGu59dZbmbfBXJuiJ2OEl7zkJZS5yEGr2xdFQV1vEHp7rraibttx6JWvfCWbvgQkU/MnPvGNlD9wHHFc3HlB2eyvbw1sbUx3y+uTpTcqQQpNo+DBh+Ce+y1FCXOBEBy6daOqLYehDWjypDRVb6BcgEf2w3zhDKqmIdY127V/LYzu5U1XjFMp/hAhtj3KyGW7mxRgE4ZpiGbOzARuuXnMR65aROsU0RftanpViYOJWkjx2eiUS69zTH/Or1e5JrjoClEKqffQzPfw4Y9+nv/tx85FaY9GUk5+h00NL3KygTpCN/120UY4Vlm6UNFisTS508sd95d84Wtw+at0buyYz53jGL7njadwy61fpIpjgkSU0cTg0U5o6gZFyttHDEoFovcMdMWrz11h9yJJZw+e4ErWsXzszx7hwBz0co2KGhWTVKfULLUu0FWKKUiZTBAaisLxxa95vvBVuPx8i1ERxRCUY6jgza8d8+9+az9rtSVUCqMLonIoLShSWl/qH+WJ4lBRIayxsrzKq17pcDQQHKARpwnK8cd/9g0quzm4qGUa7aLTRpK2q/jm1TwSj8Hq/l3tx29Cg9Vptf3DP/wE//rf/hHrkyHeDJNOrB9KX2wnLJaAQcfkx/ZMKUtLrWpmvgZ9IrPJArrMBsOwvcioE044gbPOevzP2mdLt2K1ydVelOWDH/zUsamukiv9pB7p8PWvfz3F83+XcH1jDNdccxeXv+rEZA9oF5kQwBhe//qX8H/9m6upanK3nWZLHHt7jKCSrq+VQmvd1aUHUtYdwnQ+5brrrmNxcZHD1QxTjJ7SzKFyfLxSimuvvZ3Lzz81BTltipN/0YueywknfJXJg6spjTb3V7DWIsoTN/XDExG0UgQfuPDCC1kaLKVLbr1wAtMGvva1r+HcCs13LonyMTg+HN9Msnuy3KLAKJPFd3GgoTRCTUON40DQHKxeih/sYyoFzGsG5sXZYrvVEKKiA7EURcFDj66C8YzGBT7WOBdpqvsoBgNkm5VozjlzhYECi0+Ljy6SP9kAqYsgBSbpmh7syFEBf/rJORO13K1XOozbgaf50Q2oGaID4FO+PgCpQq+0Ho+YreEERCm810ymUC657FGIiWt0EYRu4zzdwvPtPwIxR9q1HH+eJa9Bnazovj12scwHP3I7/+dPnYHZ1Hw46gEKeOFZcMoJq9xxzy6kNNQ+grEpgUkrRJJuICiQIc5Exi7yttct5jvnEO/xzvKJqx9iphx1FNxggWY+x+oRJpK8LHk+UDWScy8KJVDNGZR7+fi1B/iZnziHtjm6U0CEXUN49cWWe/7gAIvFqTQSqE1Do0IulqRSaXxjUCi0UqAf4c1vf8NGbUML1JZo4LpPwgPrI2JUuO6+ts9va8g+ktMfuZJv3yP1XcIbHh+C4POktHpWXdfJejwcPmU33Pl8zsLCAgsLC1RV1VXMWVxeps7+8u3g+c9/fmr8uBlqc6RuFzPbxdDfce8dPPTQQ8ekUwvZqi65T5xzjmMQnnDMICJ885vf5O67727VfICu6g0kX3nLdckcvX3f+bJzHoCIsG/fPk46adyeAJXtArfcckvX7TdFvT31gtZ2uPHe861vfYuD60nvPlIYu+yyy5jP54QQUqfmskS6Drcb9oQYI3Vd45zj3HPP2HqQfO1/+qd/+oz3xTsaHJcRlM2Y2kFdVtRFRe2SGtS5KVPAHRqNE51KqTX7Kf2YgYKhVFCv4gvBO403Sfz3tsTbkqZsaIbrhOEhpvohataJ2uBYxE9GyHQPhXrOkw/yKPCc08aUkgPHFLQlbjwBj0ExJjQlmENgD0Hj+PQ1Iw7HCoYxW5EnKFGo6DChxISSwlsKP6Csx5TVbobT0/J2EsP5CsMmMmwiyAC8wzgP9gBBpil9N+eLR/QmlyekxoCZ6+vsDt1Glp6RiJEsPWidoi5JVnMTIYhhZsf8+ae+nBwIeR2MpGqGFvi+d7wUp1NwDq5IXYEkYGwg6oDoNLESFfjIay++kIJ1UGugPZJCHbj+U/fAeI2mmmH0ACUjlKSKNW0fg9bfHlUkqogNHqc0TRhxYK3kqqu/0fk9ItC2p37VhSUnnjRB5jUSIqLnYOsUt681SpmuLJqIcMZzDac/J9VBSJmUAeyE6Rpcf90jeDOA0qLFp62ttSMpriL9rdPf0TwmUq/tl7gdHP+l50mQ6rWZbpAtJ2itv229uyfanHOpk2vWg5umYTQep8ywY7DqLi0tbcSJb9JNH7cCTubwhw4d2tInfVsQgRi7qK+m2aiyexzVxw4hBIqi4LrrriNslB+gDWyMEV772ud0nXV0SjroCKqNwFO5i621lssuOz0fXXXH+trX4O6772Y2mzHatSvN71H4wVtPQhsfcO21127keyi6aNGTT4RzzjkH51zKuMsW/fY5izESs8Q1GAw4++yzWdzsLc45Iw8+CA8++OAxyQzdLo6Ljh/bPGxVsrH+k3RhoHbpphVkMUBgUJ3I6nBGjB6CR2mwnXHgiJucK6L4OThd0NT5RjpoWMOOIDDHZuKLMk6+fns4/T6spMPqnFfddpvJPu8o6a6eudLkRrc2Zdp12YEaR0TJLCnCfgzaMVXwrYcOoAohVBbb+Zhj9jG32Wnt45c4drC5rnu2Z0ju1GL9gCiRUDUocahCqDujIptqHuTDqXw8VeVsxvJxag8cPWLuKINPxtTaTTERXLMEwMzMmJkJv3P9Cfz0ATjnxHSJpYoQQIxGBvDa817ENZ/9Eqv1FKqAXllmsl6x3KxAA9VgDmqd5+65gbdc+tdo6xvUgC/g6o9CPXk+o0Ixmx/AjkYEcUgoUwasXkuzGRbT9JqUtTexDkQofMPYFfzZ9Y7DwL44gRiRcpFKwQLwlssqbrppD8RIMZ1TDgxB5kQUtVgoF6nFEOqan3r3iN0hJs+MhsZBreA/Xy9Myr0UM41zjrrj2o/DhLp79tiipK21fztc/7ua43+3YzAYPK7fXG+e1k0B2iKwtraWuP13oAru8YY2hph16FtuScQWc/Xgdk4MdPnq1lrMYJB83Fn/FhFwDpzjvPPO2zLfWiW2cfPNXyKEwGAwSL3nNuV2PBXaMNwYI1VVcfvX2oPne5bfvuY1r2E2mzGdThmPx13sQdM0mLLMufQ1w9GIF73oRfkaQfzGOK+88sp0zZvyGo4XdjThRx2JOhJMCvpXhLTlLqiaCidVp8u2m4seFz22jSokopRsUadT37UybSo9BMpBNV9Fx1xiW1d5a9KmfNp02LLl5nvpVGJTTbfoiGZKNNPsF88Gks0c/MjQbnmiD54eNmrPZQYVUj1AVAWqSh19/BiJS3zymrtogLily2uyCbzhTQVaP4jIEFSJ+AqnGoL11KpC+znMK15z8QtyunW6Fg889Cjc8sWv4LH4qNIkB4WyttPlN+bviKzEqLB6kKoeirA+GfKJqx5KnFql2AvVJLH4FS87gz27prhigjeeSgJBBwQPKEQCcJBzzlxnz8knpbmWiJKaADx8ED5/0504vYjokiYeX2VsRxP+dtFlbD1OZ5SwuQ90CBvBRTlm/Znuf/7dAMm6rVKKz33uc0znNZ2hPk+PIJx3Hpx44okAhNyJuK1grJQihoArS17xilekH22a6ltu+Rpra2tYazvLu7b26Gw4rTcho2karr322i1fUZ36lvL/FxYWmM1mW+oPhKZBYqQsSy677LJk42k7KmV71Gc/e2fnmZAjzns8sKMJPzAkMOwYggsGFwxFgCKAjTrVPw8LeRujwhikACmYNA1R0dU7N0RUTFZak33uiAWraLvxjBcV1BYTys46K9pv3XLse1eBt+NULadOXVyjmYGZEZTOY3JbOb7KdeF10xFL0v8NGoOSp2cEbOvxdxw/z5+OQ0SGRFMRTYXGYVRBbBb5xu2am76wn5DTyZXNmQyxZljCFZcOkCAoNCUgoaGyc8LAM1QVF51xAue8cIxWZJtOQw186GN34RmjigUiZY7yMwRf09W974ziW+dRi0Z5EOXwxhHVbr74ZeGhVdt5O0pbYZlQyBrf/659eP8IXgIUlmgUOEMq6G9ZsN/i+996Ik1bUkinuotNhN/9wy8zMPtoGpMiB49Bkth2sKMJf7uYTJLRTaE2ZV4lUtKbctDbrEEB9uzZc9T54s92tHX4UoHMwGc+85nHfEdrjQCXXHIJoao6rrg5Hz2EwMtf/nI2KwltIMAXvvCFLl++laRkUweboxljOw5rLZPJhM9//s4jviUopXn5y4fUdd3FCLTnMjZVGRoOh7zgyAK93lNV8LnPfW5Lrb5j0UloO/iL//Q9CYKu0manoKeJe4vd9HmkNpHKFMxtwbyIzIfrVKMDVAv38MAjdQr5xmaCbzA0KHItu3Z2VdbVgeeducIoeoxs1suLrVve3/lrVRunn7wXOip03LAoqOjQXRzApnqbmyu35K+3poJtNoAGaeUchRGPkQ3JpO0AkyrVNBg9QLsl/vzaKZMaKjwx/RKDQwXPK15esLKoKWUOUWEo8drTqIZdYT9vumQBTcBTQ66E88Vvwv0PLzIXRx0sEUuU7PPXbJq39j4k0aSVUKz2IBOEVJotKEc0e3j/h+5iLoA6DFKlxItQcOpeePlLDcoamhgIwSFSQjMH8VzxigErRZrqECV7UTTX3Qr7D56MRIPRJV55IsfXpbejCX+72L9//6YebE+gs2VCizFVwz3ttNOOSS2AZwOcc0iMeO9pmoYvfvGLrK1tVEVqOwNZY3nO6fs444wzurlp8/uVUgyHQy68sMBgtnhM/uzPvthJXW0sQxt/fzQcv7tnIkiWGpxzXdzBRiy5SnUDNVx66aXd71vJJDQNzjmuuOIKWtujybEHWMu1197cnc97DzFiis0l27/z2BlP4BPgDWc+yO/+zk8SJOfMhypVe1GBqBVeO7xe5Jd//nP8zu99DlUu4mdLCCNijNxxdwo9mHlhwVqIOV42Z78B3bOTxFC47DX7WBnfxdp0L+uMaOpIWRZU84AtXBIf295yKoUwtv7aFIVG4iRiIOQee3WDwiK+wSm6CjNdPynInM9uHAdQ6KeZnadBSRdu0Ja1jMbn7DeXv9XgTKomEwtF3TyfP/oT+JH3JitDmWvtG5Pq3L39shP5N1/5PJpdKKuIxhPCGm95zR727k7X5QNd1uHHrrobOziNqlaU1uFDgxadKuNWFVqnMcaOgLdehcQZZVHQ+KSKKR2YVqvs16dy61fhknMjUlcofWKarRm8+x1n8mu/fT0+7ELsEj6A0TMG/lHe/Ya3poBIBUHprtLyx669j6BGGOXBRqwTQphla8bxwY7m+OPxmPEYlpZgZWXIrl0rLK+ssLK8wvLiMovjRcZDTVmWWzqYttFat99+OyFCYVVXI68zA+eXViLQKjXJ0CrpszFGiqJAci258XjcxduHXFn2KZF16OEw6Z7GGKyF75YwAZ8v3lpLWZbEGLn++k93XDsGyW0FEmledNHzgA39VymF0poLL7yw6wloc4eg9fU5d911F9PptMvp7/z+kOvsPzna6MD2XJLDC5um4frrH0jemrLsYgLKEs44Y5nFxcWuD18bnXjWWWexuDhKvWE23fuvfvUeHn744S01+1qPxfHEjib8mWqSlVlvmojcpaS1zUWgMmOmtmHdNawNDrM+fojZ4iN8/Z6aRw+kuEOPAWXYPKWiISpPG8RvSJ7973/76Ti5jcmhB9m9axGnhGq6mmrIz2qsLbOF/on87dk3HUt0UMzX97M4XuM5pwxxGoo2A1ZSmnISQMKmmP1jg6A9QftUIy9qNILohqg0Uelk1UcR9JSKdSYscN31B1jzuc5Au5DGVEf/0vPhtD37CUaoQ42Nc4b6EJdeMsYIWEkG0krg+i9VPHigwKsCNVCEZEtHK4UKMdVHyFJT631o72gXE98Rfo7pp6IwDbNY8IEr72TOLpAVUBYkOWf2DuA15w4wcZrqCQZFEfZz6StLnAITpbOfRAcfu2nC/v0lYizB1Yiu0FFSl5zjiB1N+I+BbP4zvYnQZfsdyYWrquKLX/RUT2KnKYrEoUII3eEvvPA0nv/857O0tMShQ4e6qqoxRgaDwYZl+qmgNaFpKMsSpRQXXnhh5yU6zoFhAFss+iEEjDGsrq5yyy13p5JkOUfdpchZBgN4xSteQbFJ/923bx/Pec6+7r3PxvC2dn5RFF12ojGmm8ejmb/NsQLt3+37r371q6yurRPaym7tb4C3v/3tnfSnjCGE0NUQPDIi79Of/jSQdP7NVYn7yL3jiKgGtK3p0w66qDAtqstlc3EXWlbQfgnlhxDSSl/Hk/jD//UNjINaSFx6U5+9IFOggqhQ4nACZYTTTob3/vBZVNW3WF7yIPsZFBXiJ+ArNAqjNLQVQx/TJTU5ww0eoyOjwRzRt3P5FSdRONCxRrc5+5u8FIJPi08bX7BNtF4HLQVailRfQUrQs7T5AU0zArHoYggGmqHmj37/TsixAJWvcixDwAr84BXPpeIAajAFfZA3v/oFjFa6C0ARmQp8+NqHkbiYrPEyRdQcQ0CLR0WhMBvxBU90vdEPsXoZhUdClTTuAMFoVoPmxs8FPMmcIilFlKKZ8qbXjlgefJPgpzgb2bv7Pi6/KN13bQxIcuPfvQrX3PIo1i4glNSxJujIgEWsHz5mPN9J7GzCjzEluHU7eNIaB1vqqee/r7/+eoCNPnmblGut2hh9QWf5r9X5v/d738QLX/hCqqqiLEuqqqIoCqqq2mJPeDIYYwjes7a2xr59+3j721/KdCpbuugeT7ScrZ23kDPvbrzxxu47rRVfodAazj//bGIIxOwNuPTSC9MXs7fQGs3998Ojjz7acfbWB9+e48g4gCfCkbp2q7fHGDHOcfXVV3eRhp3twDn27EmSSOs5eOELX8jS0mOP/7nPHeLRRx/dkGBEthzreOK74wk5TghG4S0oPBGfVHENbTVazRyQlA0YPCpGjAiF8jhAWOCBR4Z8/JP3bBxU6G6wogaqRIg5UM0CEifsWa745fe9h7KcoM0axsxwZsZoXFLVs1x/ULZy+vZvSTXcgp8xGkdGoxn/6GffiwIWRh5iljSyd6H1q0c2STet5+EY9KlX0aBiCXGYNp3iInQYYWUBWKT2Hq/nePMojzw84Pbb0m+N9kSmRKYY5TntRDjrJacg6hC7x3DBS9rxNiRrSuRDH70PL2cmd4AxaBsxyiOxRgFGaaLfHCCTjBuPbUAzJoRBal2lNXiNpUgJQrrmk9fdzfoEag3Y2LYloFTwxsvOwtqAxBlvuuKEZHI5Ih3gg39+M6gziEGjcF3gT5xbTOg5/nFD0qU372CLnq9QGNRjOqds7hknIrz//e/vfh+jPLFJXZKdSOtULuv88+FXfuVnuprqItJ1+DkaX7/WmunaGn/rb/0t3vzmRXyXENA21j6+8N5vya0vy7LLaPuzP7ur+15oi6yKoMrk9dBFwSmnnMJJJ+UvWUvLfj/2sY8BGxJFGyfQ2hFM1rufCp1fHXIX3iwpKAW5Ks+dd+bvkssG+dSY9PLLL+9sAxdeeGFXY6Bz5AvcdNNNqS/ebLYRtZelkme1VV9spKHGxzGilqjsOj4eZg+WxUpT1gbbaFQY4eeOUdSM6wc5ZO9iqhJf9aKpcQRcVmVjp1vP0cwVTDUcjpYV+TqL1JTVCrpaQqi2tZ04PchSAIWlEkvtUq1/CQuknO9hCgArHkSZGWLSkq5VhWJOYB9zvY9PfhK+/PUkjWorwBqo9a7SwFytMjVrNC4ZFHQzpGhGnNBE3vsu+M1feSenju/FhQcpJWBjQR00XgzBaIL1eFURqDEElDKYBvZNbud9P/oCfumnlxnrCSX7mfEwnjExLnQcLhcGyvb92HH5uYZZjAzjIQqvqWYWJQt0LYqypBFM6kTjvMZ5TSWnUclpuGBxwVK5hsrNiGaGUjNcvYSrl6A8COVBgp+hpUTLiOD3MCvP5L9+fD8wQWJFEZYxfoFKOaYF/MDFJ3BScwfv/cun4japUBI0j6xrrvvSIvOwiI4eIwEtI5ReADukEaglIHbj0e6yLrPO31bi0Woda6Zo3VDHKXUZmegKGyPDYAi8mA9/PFAzY8aUhgLsEBdXecclnucurnLhGZaXvfRkiiJNbVXBmoOrvnI/j3zleZj5CgMbsFJh/WGsWmc+GrBePItj9f1shjEm+Z7rmqIoWFhY4PDhwywtLTEYDFhZWWFhYYHxOBWv2LVr17e92nmffO5LS0tdXfM9e/YwGAy2tS0sLLC6ms5hFMwrSa74oxye1pqY+9j9h//wPzc+yEXl2pqBgdTXXpGja7Jk0ab1vvWtL+Lf//v/i7POOmtL9p62FqlrpGkwzmGMoaoqRITl5WV+6Zd+nr//91+HBurc0KGgoDm61n00gS294Ky1XTeXY2F1brl9W2++1Z9nsxkPPPAABw4f2GQzSXYSD7zgBanG4gUXXIBr6cOn4iuf//wXt1jIn0kopbj55puJOemqfWx1lqguvPBCXvziF1OajQfG2sTwP/GJTzzj49sOnuayo0F53LikaepsfLY0swYd93PB+cKH/vDtDMqaKEkUG7gBLlqYgyumEGbJ9KkACghmqz6rIgNdQagYWM1P/e0T+X+/94cYlMt4NFUILPGqbV28IRHIhENYLKPSJf99aNDG5Do6FsEhcYEgSwQJiJisJjxIsVSwOjmJD3xwP3/lr8ErXqYZ2QWs5By6NhkMwKymXgHlcnorcwwKN/Zc/lrNRz70Fj561S381m99mFtvfRDTPA+wGBxxzRPVXTz/rCV+6IffwA//0OtZGswpEAI1IwyaBcBhc7RoR/xyRAcBFUFH9njNz/7gWfyVNz8HMRq0UEVPE0qu/fQd/Mf/fi8h7k558gDmUSBA8YX0vl550vltA502J8+07aEOHz7MRz4V+YE3LyY/iIqpSmAz58TdC1xxxTLnv2Qp9SOyUzBCzSJ//KePEn1JqARdbjPRpbX0t7H9WeWIaEQcQWpu+cLtPPDIuTx3b5keT9n43uuuOMR4PKbkEJFINAWYEoXjk1fXBFUQlNmwK4jDBIjqUH6/veFvB9uSN1quEHI310E5wDaO6fQQRZFymFFQuGTVFCGJRPIkevBm+Fy+BHDaocsBNQGFYWCKbSaaAAHmc3CjDcIIkjqyHs34Wh2xdA6rLP/0n/4H3v+f/zeGbb21zUQPNL5GH6G7h7rGFJaZnzGwK7ztzZfw5jdfwsGD8OUvwIH9SXzctxfOfiHsOxm0TTfOYJhVawzLDRdijBCaPM9PhSZwzsvO5vk2p//ozn7FN++pgHuP4iBPjNaHvzG2iMuSS13XfPSjH+WvvO3vbIQhExm4AVPgx37sxzbE/Py8zGfwqU99Cu/PzfP4zGa4xRiZTGbceuutnPGmVyfjrIY8YF796leza9cCkQPdb4IEDhx03HHHHcB5z+j4toPtEf5axdLiInOTjDfzacNIL1MWaygFloNEaTDKEsVh9XKaslyzTjZNGKZMtcQ6CVODGYOCWM/Q1mK1QoeQXWOR7VSIBUCloJFAiY8epRyGEpiloo8mBZeqmKq/Qurt15rGHY5mPkctLnPIKz7xuYf5F//pm/zs33seg5gK6Xbp9ALOngACE/cIkciiPwmjBhBgWQ+BSBkavArs2mV53us2bo8BREI2MoVEDFJgze5uzur5GsVQYZzkQba1AlOP+Y367XllGuT7qCZ4qRkwwFLi0ZRumqrpoFIVG8CGMSjPoElltJ6K7Nq2z60q0TYFbYNkrrqx4aEZnDJMPk6pNNYZrPJceM4+igZAIzJGFZrPfx3uuGcFY7ILdLt9JfUsz0+KmZe2hmAc4BWIHhAYcM2VNe96/SYGHUegFC85w6I1mJjugdgZjYpc9XFYm5xOVaxBHJM8MQYTks/P6Dbi6/gZ+LZ15rZefT2Z5Dhx+5h68U45NBqrsivj21AdY7Mp7rqNlNqUUbVdhPzgBAlYbdFKU83nXXfXp4L3Htt2s51O2bVnD7/1W7/F//rodcmv37oHPVvEOo/v4tWlgXqWJqWLt9e26we3GVt8+0ohuchLW82mKMuOO8ajqeQqqc21ILicWNNmzh2rCjGba+RrrbuYeqUUq6urfOlLG2Np9XarbBpHflbauIRbb32g888/091kga5+3y233IJI51TosvW0putj0N4DheJjH7u+66z73YptcfzQTNAIdkkIcR2JDlOCylYaZZaJIaKkSHRaQGOSuSudfPfWAyq2JIqnLqQQtcaQrCaqlUUD1IPtGaAKm5IyUrWcdD/LwWATh9RtEWfQE9BlGoCegghGLRB9Q3SCXhhxsJpR2ufwMz/3ZRbNJVx2KewpSN1iQ9UF9Vk5Cas0uHWUg4ISRFOYATRgtMYEm9l8BJ2tdW1ePRpixLsKjSZGhxdwpmA2qygLiymGGyw5+RDpqhnTgDhqFNjW5g+KYUphN0AzJsYx3kDIVWmLagwYTK5CHNz6k87vZrfVkcEyWmtwp/H+q+/hza8+FSLoIolIhoYQalCLXSLF/gb+5JP7kWIB7dcJQYMZPc07n5FtH1rKlMWXmy4KJoVdaEVUhjvvLrnpFnjFK+dYpVBiQBcYgVIiBI0KEOOQB9fhM585xMQv4IsGjEeJxURN28lZS7oP2+lbuF1si+M75zodLmYfalu/vr3Hxlq0AdNKnZmUIkdHtFFiFwG3xc9+LAwj2fqulEKrTXXw6qPrqWeMITZNZ7Wmabpqrf/wH/5bvvzle6mrx17nY7ipSKs2JppuSLQYoUv3EtlaOVZrNJqqqZK4aeDLX/7q1g40TzV+TXbwxe5+tPftWHH8ltjbLjeba9HXdc0111xDaLl3FgfnzZzCFDmYP619a2vJL95WL/pO1DRoK/dWVcUNN3x945lt0x9jxBS6YxoA9933AOvr60d9D44XnibhJ/26jqdSVyeizKlgTsWvD4j1CqXdmyrBiCU1fk8/MSFSBkUZS4Zx2FVuMZLKz7e8ZyPOLDUhVFSgZmAmUEzATWA4oRC9rQ01J+iKhkiNplEq6fDFCjAiUBKAuoHCGLTxUE8odInTJYRIWQ6QoBA/QPE8fPU8JuFE7l1f5i//yJ/zn/5Yc9hYpsWYGTOEihFTSipSxfYFIJdtydb2xPlyKZ2cAyAUiB7hKfHiqHCs42jcAusBPnZ1zQ//rV9n2hQcaHLsoWnwJmUgBjSBhbTl2nymgXIOQ2YMmWOaCjNP+QSFnuHUGkqvpa68usKbiDcNtVunfgpuD3QBLkCn128Ohgp6F3d+s+DrdxYEpTvHjnELzADsDMoZEwXXfHqdSi1QoZFocXb7hSxEhkhcIcoQFYfoXMlI5TyCIIFaV0gx5s9vvAfPiHUclSnwCuZmP0EfIhQTwjDFRXzgA3cTBpoag8RlJC7n46bnWFFt5DIcR2wvgEcEXZY0kwl4z3DXLpRSG72/20ooj9nYCG3dtHVdcJ7gH0duT3j8o9ue6Ojdd9pJ0rqr4OpyXnlzFP3N5/M5//gf/wt+6Z/8Fx49/Cga3UWpba7CG0N4rM2iZSGBpOJsMm2EkMJDIzCLnn/9r2/gJ3/yJ3n44YeZzWDgEhffcm3y2CkHspTfVQvpOmwdk95+T4E2Su7KKz+ZTq90V7vQYpOdQgRr4cYbb2Q2maCd6/oiPtPQWndS7Wc/+1kqqi0VgBxuUzWhtO/jH/94l3fx3Yxt+fHrcB/DxSFT1SBNw6xZhVjhlvawpqE2KWwsEROETpdsu61mg1IOaule8482MpuL7ndbBr9dcd+nzirNpghXE8Hm2u9BQR1AFWeDuwmJHqNLqA3ODPH5ITWhVd5T2+4gC1R6xFwVDBf28q9/e42rPnEHP/N/vJp3vxWGAli6B0lZl6vmqGRXND5Vj2GGFEJEpbp+WQLBpvXg+pvhV//5LXzupttw6lWUZUNTwGEPzmpgw+Vp2jjyTepSO58NewiSZlkpmHuQ0YuZ2TuSBNQeJfe1D2aSr3tzn6inMf0zgytX+PStC/zgHNxgqwG41A4JcGANbr7VgSzhzABtkhG0CttrfBrcofRH1r1NtoGEXBnHB8+ktrhyL+hTuOqTcMVFMMhVgxpWMKmxMwJ86w44tP5c6mJKmEUwewBQCEq17h2Icnzj9AHU7nP+gRw2LyN6ByplOJU5bjyYXCghFyxsUwm9rUB5bNbng2qgLHG6INaeBe7l4gtOR8fb0++xIKab0I7wSat2InhD1Mntkd5b5AiBRB1hF7CyTa4kyeWVCD8pGYnw03Fnjacc7eJLXzuRux9+hGJxAGJpZskf3WXYS0v4yT0ZcounGGqU1gy1xVUBq7/AueeMeO8PvpV3vecCxgs+z4/BiNq4WhUJsSYwx2mXbZmJ8KcBrvzY1fzX//4hrrp+F8PyJGZTz8JgRAiHeelLTmJp94QQ9iNME8GLw0SbjFli87UmI6JSirp4OEVExjGhSd1sbv/mo3zj4dMJqqtNQtkk/19jU0uq7RJ+UIvEumav+joveekClU9W+7pxyVbRrDIajajlbG78/MNUg9OTPWWeqvFit+nHb8XtTPjdwpaf06IoqCZTDIZSNIt7r+UlzzubuJZzBNRhjPMYlTwVq4fP4KvfqvCjMcou0zRpfhxTjHhUZhRdG/FtuvO6kmyxLXXWruiJroKySDRoVaJCxNiYErhU9XQJP02YyW6Zpki/89Mp1o0ZqCQOxxxGOrcu52qn32vzQNLpM8dNLoBA25uuKwWbEVE8Xj61bNP+NK7TxNcmG5dyn7KiLbns6iTWczpeCY3aT4wRO19I4a0mT7xJnF6HJYglobVkm9wgQs8ptIHZArryjAeK5QXNha96PueddwavfNUip58BS4sw2GSojsCD98O998BXb4NrPvVFvnjrXRxanRODwi8OmUwmDEeJA3vvKdSAaqIZlOONwg8Euiq9KoBKPqgZJV5UCi/UJQQLVc1onIpZzPO86xgx0VCEdA8ql8uKbzenP0QGrkCRQpGVS25hrYbEOtcPVIr1yRA3HOCLlMykQmoUGmV7PcGDPQSAFoOJNhOmTXXvJdXNl1Cg1RiaQFE8igoR3YAxBcEusHb4MLuWYDabYcvdSUos19N9l90YARerPP/pfszVLgAs25NYtkP4247cK4qCqq14UhQoUs2ypmlyIAkpKiuGFHgCREKag85KHfID2TpDH4/wH0vl2yX8trVxlx2mWv07RyTSMJ/PMYOAcqkPnHWO4XCYdEzz5AMITYO2lhgiVd2w4HYxLkeEeo39+/dzzTX38KlPrRN+bUaQNRYXYPcJY4oiSVIPP7rKbKIIfhHDLoIaY9gFOKqqojLSdZAZjUZ471kYF0iTft9ViWnn94h51k5jtcWbAEE6a/VsNku/LZ7ZYpAhBKKJVJmDW6WYTqcMB0VKaciZfMPhbjxCXaUUZ5V/e7Q5FU97fFWFcWXyXOUKvLP5OiOTJB9jDK4sCWGKc44oQuM9x7GG5lFjW4QvMiTGYapxBhTlHOU9hiGj0ZBZOJjag9s5MEc1liLAIKQV6XCR2FuqpJZ1UmnpPg9NTKfLtxFk7YMrbM9lMs8ZII3LnCMfP/i0grpyBM4zJ0JMvvyAI4QVQhDEpBVb+TMxMdXXMxKwMsvX5Sk01IyIKjIvVllvGtAWu3sPvnYgy90KdnjuePCB1FGmqQVjkmFJmZS408QKCRXYmnJvCbXQxAZldjGtFUafxIEDM8a7l5lPJmi3mu9T6uEn7RNpkkqyOAHQTAeparAziqI0hNqhVKCJc6DC+N05rSLPT+4RYMP2OP7IzVDM8WYvdjigKSIS9zN1NdoCskiUmtHYMz28hrJrWGNRdhGRjQCfp43mOQAo8TlEIj1oRnmCCRgbCGoCpsGUlsNT0GYRGaaCKfMwQS0MmcxSMdFp9QjGtQwld2GKJB++0oie5U5CbXfobY5/G9jWmtlmc7W+482VTmez2UbtuCOt9k+x/zu9PZF3ocqdXRBBWYseDmnrux2N1bbNpmujzLq49Tb7rfXRa50kg5y5Vtd1F+feZqK1HNwUBUqpLkvPGIPkuu4xRsrxmMnqaudKe7LrbKPL2io5IQSapkndZr9DqOuaYjDAz2b4+Tylt8lGxiBaM50mjjoajQi5+27zHRijtTaVTFIq1c7PtQ3bZ1w5hzRNJ3W1tf2J8aiq/B5PbEvH37aO16NHj6eN7ej4O7oCT48eOxU94ffosQPRE36PHjsQPeH36LED0RN+jx47ED3h9+ixA9ETfo8eOxA94ffosQPRE36PHjsQPeH36LED0RN+jx47ED3h9+ixA9ETfo8eOxA94ffosQPRE36PHjsQPeH36LED0RN+jx47ED3h9+ixA9ETfo8eOxA94ffosQPRE36PHjsQPeH36LED0RN+jx47ED3h9+ixA9ETfo8eOxA94ffosQPRE36PHjsQPeH36LED0RN+jx47ED3h9+ixA9ETfo8eOxA94ffosQPRE36PHjsQPeH36LED0RN+jx47ED3h9+ixA9ETfo8eOxA94ffosQPRE36PHjsQPeH36LED0RN+jx47ED3h9+ixA9ETfo8eOxA94ffosQPRE36PHjsQPeH36LED0RN+jx47EFbrAqcNtQiCYK1FV036VBmCAjDt1/Nrv1706HG84UJ6nWfyFO0BKL1FCxSygveeOLo3kbDejfcaIxYdQiDG2B0sxohS6jt8CT169DjWaOlaKYWIEGNERBARbLvDmAIfBZEIJiAxEnReAFS7MLSc/sj3PXr0+M4j05+SrbtVBIEYPUoponIE8eioQRRKRWzL3bXWqLwIAIgccbAePXo8q6GUQimFVhprjCKIgAhohYSIKEUERPn8i8zhld36vl8bevT4LkDc8hpVRCnAKqIIXiwBhWGAjoKoGm2tRUTwPokFZH2gR48ez24caasTEVqbnh4PHU5FiBGFRqGJKERt6O9RCVEJoACFEo2SXr/v0eN4QtAImsTpY6ZO0AKS/4gEBIfSJVFpJIC1ET0YDLA2ifBa696i36PHXxC0FvxWt2/hnEO/4HknQ1hHSYSokADBK7QqiKQNMXnTebNp69Gjx3FElsCJaZOtBv4mNgQCRjuiF0yMjMuCZvpN9L59+xARyrIEEtcPIfScv0ePZzmMMTjnqKsKQsBaS1VVAOjLXnUGpTqMrw4Rw4zoa0aDBXwdO06/oUscufXo0eN4QWgda0nHRywmWpSkLdQVoiIoBcYQwxpWZuxZWEVffPFZOOcwxmzRCXrLfo8ez27EGAkhoLXGWEvTNJRlyUtf+lL0vhPhJS9cZlBUlLZi6AzT6RrOucc7VN583nr06HG8EFXaNpT7LIlnW5wbFiiEGAIKT6EbVDzIu9/5AnQU+Et/6S+xvr4OJEugc67n+D16PMsRY9ziqRNJSXiXXnoRWvx+3vrWXZx55omEsEYMM0aDAoJPEXpbtpA3n7YePXocN4jK/voMLQodN+Js2vD7wgKxQceGt7/lck47BbRzjqVFeOc734lSCuccs9ms8+336NHj2YmyLIkxdrp+URS8973PRQNWmkMs2yX+7l/fzZ9+YIFvPPAIiyecwOqhQ6hoWCh24esxfl6jihoAmZeUZYmX+RGnike832T5F5P0kU3+fzHVM3G9PXo8K3BkUp1+jHb95J6zQo2ZTqcMR0MAqtpDMaIxBd57CB5VBIgzBuEe3vnOl3Phy2DIBG1ciQgsLcF73/sjLC8vs3r4MEVZMhwOO93fWotzrtMXvO9F/R49jifm8zlFUaTU26zPxxgTbcYIOR5HRFhaWuKnf/p7UQqaao4NfhelBV8I/5+/rfjsjTWf+LhCUbI+UZSDETN1N27gmE2HoBTLe2B19RBKLwOgj8gOarP3tvL/zOk3GQ2L0McC9Ni5qM1WCgl6Kx09VgLIn2a93gwfQDnHZL6MKDCjApEGwwwrCl0Ldj0yLtb5mb/zHs7eB8SAKx3aWEuUiMtFN37xF3+M3bt3E0JgOBwm635dp8o8xjAcjTh8+DBFUTwDU9GjR4+jRau/K6WwRZE4fl0T6pq6rjsavfjii/nRH30uANYaQFAhiGidauwJqYjXpz57P3/9R/8Fjxx8Hnp4DhMZp9A/uQ9ChRs4/LzCmLbYlwFsjvTLr5vRegIQUB6VYwCC6g2IPXYuTLMC5LoXKmRJuX31m+pebJaMbffeq8OJ2HXeXy+CUgyUYdAIuvkSLzsH/vgD/4iVZYBZOkQcotuQ/LqqUPnfy1/+PH7hF36BpaUl6rpGRKgPH2Y4GkGMNFXFYDB4puelR48eT4Itnre6Bq0xZUmdOf4ZZ5zBf/2v/4jRaKOilkiuw+dFROIaVluQkno2oxgNqYE/+tiX+Im/99t4/yrEnsihWWBhYYFZfRDB444I8pEj83pUkiCUxOz7z2VBsw5Tq4VjPRc9ejxrUKj96Y/oQMosLZcIZmv2a6YdRZP/ThL6nCHEAmfGSOMZlxaZTYEv8erzR/yzf/4eLnjBqag4Q2JEqcV0PJ39BVbbZAUEiqzXe/G89S3n8u/+3b9icXGRqqooioL19fUNEb9Hjx7HDcYYlM5if9NQ18nd/spXvpJ/+S//Hi96wek0vgGtUdbis/fce1BR5hIptxywtSZGlSSIBx6Z8eM/+St88baC1fUTiMM9xKARlcr7RBqMFQKRxs9Qhpz0o5BoNmwAIeXxq2zh1+rgd2SCevT4bsSRNq4jJWbVOvpjKoKrJaXNt/p506TXZQdxdoCF4Tf563/1En7u/3wXpQHdHW/DRmDaaj1PRvhNBGNSOs7qDH7rtw/wf//rD1K7ZSbrFcbZPGBPXU8ox0NcoVifrKKNQWu7ydhnUdF171O1z57we+xcPBXht+WxjdKJ4CXr6jmLVutBisjzM8574Rn81E9cylvfBNYm9fpJCV+kloAjAJJ1b0vunRN0Svi1M6rpFDXaxcOrip/5R/+KT15/H/tXT2e8tJfJbApiCNHQVBE3WgQMTcg6fbZWapKuorOuL6HX8XvsYKgcCdvGvXShfOm9MQaa5LYz0RJFoYLGGMPAOpAvsO/EGf+vH3kTP/o33sDu4QQFEAT0CFGaAEQ8Lf0ZQMXxURB+AIrkBpiKwauCANx9P/z73zzIB/7owxxeW2U0XGQ2D1gzwGMQ0ZD1j+QmTCdWOnbuPOLiMzirPXp8l+MpCF9EUF6htaZQJVEUOhoGgwFLozE/89OX8dY3wZ5lKADHGian5kpjwBVPQvhRBHUonU9W8oCyP5EpoCAuUc0DxUiAQKTC46nZTQSu+fRt/PknbuWLt93L17/6EJOpI9RjlF1MOj46XcQR1n2veiNhj50LK9naJg6wiOQaGEoAj7UR4kFMsc7ePZbnv2APr3rF2Vx2+as574WnIz4wsobAOgUGkSHiI8a2HXZW85kcUG7EA6jqqQg/cfpQL2FsasoXaYhUaDRTllirYZiD+AIwn8JXb4e7vwUPPAzSxiAIaSFr03vpCb/HzsZjCT9/kHXz4RBOORme/wJ47hngio32tZrE5X1TYV3TEX7X5C4I2q7ld48l/P8/e6FB+yjLnCYAAAAASUVORK5CYII=' alt='EdWeek Logo' /></div>
+      <div class="flex-grow-1 d-flex flex-column justify-content-center">
+        <h1 class="h4 mb-1">EdWeek <i class="bi bi-globe2"></i> Space</h1>
+        <p class="text-secondary small mb-0"><strong>Your starting point for everything EdWeek.</strong>
+        <br>
+        <span class="text-secondary small">A curated <b><em>space</em></b> for accessing our key platforms, apps, and support resources.</span>
+        </p>
+      </div>
+
+    <!-- ms-auto for the button to force it right -->
+    <button id="themeToggle"
+            class="btn btn-sm btn-outline-secondary theme-toggle ms-auto"
+            type="button"
+            aria-pressed="false"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode">
+      <i class="bi bi-moon-stars" aria-hidden="true"></i>
+      <span class="visually-hidden">Toggle dark mode</span>
+    </button>
+  </div>
+</header>
+
+<!-- Scrolling ticker (below header) -->
+<div class="ticker-bar" role="region" aria-label="Announcements">
+  <div class="ticker-track">
+    <span class="ticker-item">🎄 &nbsp;Trim The Tree & Menorah Lighting Social - December 3rd at 3:30 PM</span>
+    <span class="ticker-item">🍪 &nbsp;Annual Cookie Contest - December 10th at 1:30 PM</span>
+    <span class="ticker-item">⛄ &nbsp;Holiday Party - December 10th at 6:00 PM</span>
+    <span class="ticker-item">👚 &nbsp;Ugly Holiday Sweater Contest -  December 10th at 1:30 PM</span>
+    <span class="ticker-item">🌐 &nbsp;Bookmark www.edweek.space for quick access!</span>
+
+    <!-- Duplicated for continuous loop -->
+    <span class="ticker-item">🎄 &nbsp;Trim The Tree & Menorah Lighting Social - December 3rd at 3:30 PM</span>
+    <span class="ticker-item">🍪 &nbsp;Annual Cookie Contest - December 10th at 1:30 PM</span>
+    <span class="ticker-item">⛄ &nbsp;Holiday Party - December 10th at 6:00 PM</span>
+    <span class="ticker-item">👚 &nbsp;Ugly Holiday Sweater Contest -  December 10th at 1:30 PM</span>
+    <span class="ticker-item">🌐 &nbsp;Bookmark www.edweek.space for quick access!</span>
+  </div>
+</div>
+
+  <main class="container py-4">
+    <noscript><div class="alert alert-warning">Please enable JavaScript in your browser to use search and filters.</div></noscript>
+
+    <!-- Search tags -->
+    <div class="mb-4">
+      <div class="input-group input-group-lg">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input id="search" type="search" class="form-control" placeholder="Search tools or resources, e.g., cms, templates, invoice, tracker, outlook, helpdesk, etc." />
+      </div>
+    </div>
+
+    <!-- FILTER BAR - alphabetical -->
+    <div class="d-flex flex-wrap gap-2 mb-4" id="filterBar">
+      <button class="btn btn-primary category-pill" data-filter="All">All</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Accounting & Finance">Accounting & Finance</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Branding, How-Tos & Templates">Branding, How-Tos & Templates</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Content, Video & Email Platforms">Content, Video & Email Platforms</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Data, Analytics & Automation">Data, Analytics & Automation</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Email, Chat & Meetings">Email, Chat & Meetings</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Human Resources & Payroll">Human Resources & Payroll</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="IT & Helpdesk">IT & Helpdesk</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Knowledge & File Management">Knowledge & File Management</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Office Applications">Office Applications</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Project Management">Project Management</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Sales & CRM">Sales & CRM</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Security">Security</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="Trackers & Requests Management">Trackers & Requests Management</button>
+      <button class="btn btn-outline-secondary category-pill" data-filter="UX, Engineering & Website Support">Website Support, UX & Engineering</button>
+    </div>
+
+    <!-- LINKS / CARDS GRID -->
+    <div class="row g-3" id="linksGrid">
+
+      <!-- # Accounts Payable & Finance -->
+      <div class="col-md-4 card-wrapper" data-cat="Accounting & Finance" data-tags="truist expenses reimbursements accounts payable ap">
+        <a href="https://identity.enterprisespendplatform.truist.com/login" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-credit-card-2-front"></i></div>
+            <div><h5>Expense Reporting (Truist)</h5><p class="text-secondary mb-0">File credit card or cash expenses<br><em class="managed-by">Managed by Accounting</em></p></div>
+          </div>
+        </a>
+      </div>
+	  <div class="col-md-4 card-wrapper" data-cat="Accounting & Finance" data-tags="invoice invoicing gl invoices ap email">
+	     <div class="card card-link text-decoration-none h-100 copy-email" data-email="ap@educationweek.org" style="cursor: pointer;">
+	       <div class="card-body d-flex gap-3 align-items-start">
+	         <div class="link-icon"><i class="bi bi-receipt-cutoff"></i></div>
+	         <div>
+	           <h5>Submit Invoices</h5>
+	           <p class="text-secondary mb-0">
+	             Email invoices to Accounts Payable<br>
+	             ✉ <em>ap@educationweek.org</em>
+	           </p>
+	         </div>
+	       </div>
+	     </div>
+	   </div>	
+
+      <!-- ## Branding, How-Tos & Templates -->
+      <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet branding brand template guide manual">
+        <a href="https://editproj.sharepoint.com/:w:/s/EdWeekEditorial/Ecmhx1KFrY5GkSdfdN-MDLQBrfQYOEzJ9sxz0zlUrLCxwQ?e=2rEoj6" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-bookmark"></i></div>
+            <div><h5>CMS Production Guides for the Newsroom</h5><p class="text-secondary mb-0"><em class="managed-by">Managed by DigNews</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet branding brand template guide manual">
+        <a href="https://editproj.sharepoint.com/:f:/s/EdWeekEditorial/EspxV7iy_PVBiAhhUwydq-0BEq8oe_SXSifZNSKSfnaegw?e=5OBJmB" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-bookmark"></i></div>
+            <div><h5>Market Brief CMS General Training (slides)</h5><p class="text-secondary mb-0"><em class="managed-by">Managed by DigNews</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet branding brand template guide manual">
+        <a href="https://editproj-my.sharepoint.com/:w:/g/personal/hkim_educationweek_org/EYybCA0p2RFAird8KDA3thoBRstbjJL-ozvrGHlhc4EEUg?e=jGuNjB" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-bookmark"></i></div>
+            <div><h5>Production Guide for MB Webinars & Quarterly Briefings</h5><p class="text-secondary mb-0"><em class="managed-by">Managed by DigNews</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet branding brand template guide manual">
+        <a href="https://editproj-my.sharepoint.com/:w:/g/personal/hkim_educationweek_org/EeNSQhYADl5PtxtaK0ENCwIBGE64UyrO5xWuGO5S4KImHg?e=rvl6oy" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-bookmark"></i></div>
+            <div><h5>Guide for adjusting Labels and Pelcro Paywall Tiers for MB Articles</h5><p class="text-secondary mb-0"><em class="managed-by">Managed by DigNews</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet guide manual faq upgrade cms">
+        <a href="https://edw.link/CMS-Guide" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-info-circle-fill"></i></div>
+            <div><h5>CMS Versions 4.5 & 4.7 Upgrade Cheatsheet</h5><p class="text-secondary mb-0">Guide outlining changes for CMS upgrade to v4.5 & 4.7<br><em class="managed-by">Managed by DigNews</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet branding brand template guide manual">
+        <a href="https://editproj.sharepoint.com/:f:/s/EdWeekEditorial/EsLcWHruTxxIu_GvrhomBTwBFLrv52EeqQWwBhD6HIgmhQ?e=w5eo4t" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-list"></i></div>
+            <div><h5>List of CMS Guides</h5><p class="text-secondary mb-0">Over 20 guides covering various CMS features<br><em class="managed-by">Managed by DigNews</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet branding brand template templates guide manual">
+        <a href="https://edweek.atlassian.net/wiki/spaces/BRAND/overview" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-palette"></i></div>
+            <div><h5>EdWeek Brand Hub</h5><p class="text-secondary mb-0"><em class="managed-by">Managed by Brand Council</em></p></div>
+          </div>
+        </a>
+      </div>
+       <div class="col-md-4 card-wrapper" data-cat="Branding, How-Tos & Templates" data-tags="howto how-to cheatsheet cheat sheet branding brand template guide manual">
+        <a href="https://editproj.sharepoint.com/sites/VEX/_layouts/15/stream.aspx?id=%2Fsites%2FVEX%2FShared%20Documents%2FOnboarding%20Videos%2FEW%20Tracker%20Training%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E9aec9117%2D1433%2D4d00%2D9d47%2D9eb71fca15fe" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-lightbulb"></i></div>
+            <div><h5>Tracker Training to create Art & Editorial Tickets</h5><p class="text-secondary mb-0"><em class="managed-by">Managed by VEX</em></p></div>
+          </div>
+        </a>
+      </div>
+      
+      <!-- ### Content, Video & Email Platforms -->
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="mb edweek cms wordpress bricolage brightspot content management">
+        <a href="https://cms2.edweek.org/" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-file-earmark-richtext"></i></div>
+            <div><h5>EdWeek CMS (Brightspot)</h5><p class="text-secondary mb-0">EdW & MB content management<br><em class="managed-by">Managed by DXO</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="tsj cms madgex content management">
+        <a href="https://admin.topschooljobs.org/login/" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-file-earmark-richtext"></i></div>
+            <div><h5>Top School Jobs CMS (Madgex)</h5><p class="text-secondary mb-0">TSJ content management<br><em class="managed-by">Managed by AMS</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="cms video platform content management">
+        <a href="https://signin.brightcove.com/" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-play-btn-fill"></i></div>
+            <div><h5>Video Platform (Brightcove)</h5><p class="text-secondary mb-0">EdW & MB video platform<br><em class="managed-by">Managed by DXO</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="url shortening rebrandly links shortener">
+        <a href="https://app.rebrandly.com/login" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-link-45deg"></i></div>
+            <div><h5>URL Shortening (Rebrandly)</h5><p class="text-secondary mb-0">EdW's official short and branded URLs<br><em class="managed-by">Managed by DXO</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="data graph viz visual layout">
+        <a href="https://app.flourish.studio/login" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-image-fill"></i></div>
+            <div><h5>Flourish</h5><p class="text-secondary mb-0">Data visualization platform<br><em class="managed-by">Managed by DigNews</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="adobe photoshop indesign video premiere publishing layout">
+        <a href="https://auth.services.adobe.com/en_US/index.html" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-richtext"></i></div>
+            <div><h5>Adobe Creative Cloud</h5><p class="text-secondary mb-0">Design, photo, and video apps<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="email iterable marketing newsletter">
+        <a href="https://app.iterable.com/" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-envelope-paper"></i></div>
+            <div><h5>Iterable</h5><p class="text-secondary mb-0">Cross-channel marketing & newsletters<br><em class="managed-by">Managed by Marketing</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="pelcro subs gos gating paywall subscription subscriber">
+        <a href="https://www.pelcro.com/en/login" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-lock-fill"></i></div>
+            <div><h5>Pelcro</h5><p class="text-secondary mb-0">Subscription & membership<br><em class="managed-by">Managed by Marketing</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="mb edweek stageing stage qa uat cms brightspot content management">
+        <a href="https://cms.epe-uat.epe.lower.k2.m1.brightspot.cloud/cms/logIn.jsp" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-exclamation-diamond"></i></div>
+            <div><h5>Staging / UAT CMS (Brightspot)</h5><p class="text-secondary mb-0">EdW & MB staging CMS Tier I<br><em class="managed-by">Managed by DXO</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Content, Video & Email Platforms" data-tags="mb edweek stageing stage qa uat cms brightspot content management">
+        <a href="https://cms.epe-qa.epe.lower.k2.m1.brightspot.cloud/cms/logIn.jsp" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-exclamation-diamond"></i></div>
+            <div><h5>Staging / QA CMS (Brightspot)</h5><p class="text-secondary mb-0">EdW & MB staging CMS Tier II<br><em class="managed-by">Managed by DXO</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- #### Data, Analytics & Automation -->
+      <div class="col-md-4 card-wrapper" data-cat="Data, Analytics & Automation" data-tags="analytics web metrics dashboard chart">
+        <a href="https://www3.an.adobe.com/login/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-activity"></i></div>
+            <div><h5>Adobe Analytics</h5><p class="text-secondary mb-0">Web analytics platform<br><em class="managed-by">Managed by Audience Engagement & Analytics</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Data, Analytics & Automation" data-tags="analytics web metrics dashboard chart">
+        <a href="https://app.metricsfornews.com/account/login" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-graph-up-arrow"></i></div>
+            <div><h5>Metrics for News (MFN)</h5><p class="text-secondary mb-0">News analytics platform<br><em class="managed-by">Managed by Audience Engagement & Analytics</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Data, Analytics & Automation" data-tags="business intelligence dashboard">
+        <a href="https://app.powerbi.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-bar-chart-fill"></i></div>
+            <div><h5>Power BI</h5><p class="text-secondary mb-0">Business intelligence and dashboards<br><em class="managed-by">Managed by Audience Engagement & Analytics</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Data, Analytics & Automation" data-tags="workato workflow automation integration">
+        <a href="https://app.workato.com/users/sign_in" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-gear"></i></div>
+            <div><h5>Workato</h5><p class="text-secondary mb-0">Automations and integrations<br><em class="managed-by">Managed by PM/BA</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Data, Analytics & Automation" data-tags="lytics cdp customer daa">
+        <a href="https://app.lytics.com/login" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-table"></i></div>
+            <div><h5>Lytics</h5><p class="text-secondary mb-0">Customer data platform<br><em class="managed-by">Managed by PM/BA</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4 card-wrapper" data-cat="Data, Analytics & Automation" data-tags="lytics cdp customer daa">
+        <a href="https://console.cloud.google.com/bigquery?project=epe-edweek" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-database"></i></div>
+            <div><h5>BigQuery</h5><p class="text-secondary mb-0">Data warehouse for storing/querying/analyzing datasets<br><em class="managed-by">Managed by PM/BA</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ##### Email, Chat & Meetings -->
+      <div class="col-md-4 card-wrapper" data-cat="Email, Chat & Meetings" data-tags="outlook email calendar owa webmail">
+        <a href="https://outlook.office.com/mail/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-envelope-fill"></i></div>
+            <div><h5>Outlook</h5><p class="text-secondary mb-0">Email communication tool<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Email, Chat & Meetings" data-tags="outlook email calendar event owa webmail">
+        <a href="https://outlook.office.com/calendar/view/workweek" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-calendar3"></i></div>
+            <div><h5>Calendar</h5><p class="text-secondary mb-0">Meeting scheduling or room reservation tool<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Email, Chat & Meetings" data-tags="slack instant chat message dm">
+        <a href="https://educationweek.slack.com/" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-chat-dots"></i></div>
+            <div><h5>Slack</h5><p class="text-secondary mb-0">Direct team messaging<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Email, Chat & Meetings" data-tags="teams meetings video conferencing teams">
+        <a href="https://teams.microsoft.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-people"></i></div>
+            <div><h5>Teams</h5><p class="text-secondary mb-0">Hub for meetings & video conferencing<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Email, Chat & Meetings|Security" data-tags="outlook quarantine spam junk quarantine portal">
+        <a href="https://security.microsoft.com/quarantine" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-shield-exclamation"></i></div>
+            <div><h5>Outlook Quarantine</h5><p class="text-secondary mb-0">Dashboard for flagged emails as spam<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>      
+
+      <!-- ###### Human Resources & Payroll -->
+      <div class="col-md-4 card-wrapper" data-cat="Human Resources & Payroll" data-tags="paycor payroll time hr benefits">
+        <a href="https://hcm.paycor.com/authentication/sso/SignIn?returnUrl=" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-person-vcard"></i></div>
+            <div><h5>Human Resources Portal</h5><p class="text-secondary mb-0">Payroll, timeoff, and HR portal<br><em class="managed-by">Managed by HR</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Human Resources & Payroll" data-tags="department org charge people directory">
+        <a href="https://hcm.paycor.com/documents/#/client/178833/employee/18250623305064/documents" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-book-half"></i></div>
+            <div><h5>Employee Handbook</h5><p class="text-secondary mb-0">For Interns & Full Time Employees<br><em class="managed-by">Managed by HR</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Human Resources & Payroll" data-tags="department org charge people directory">
+        <a href="https://secure.paycor.com/Perform/Employee/OrgChart#list" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-person-lines-fill"></i></div>
+            <div><h5>Org Chart & Directory</h5><p class="text-secondary mb-0">Directory of employees<br><em class="managed-by">Managed by HR</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Human Resources & Payroll" data-tags="recruiting hiring">
+        <a href="https://recruitingbypaycor.com/login" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-person-plus"></i></div>
+            <div><h5>Recruiting for Hiring Managers</h5><p class="text-secondary mb-0">Posting positions and tracking hiring progress<br><em class="managed-by">Managed by HR</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Human Resources & Payroll|IT & Helpdesk" data-tags="new change departing user forms onboarding offboarding access">
+        <a href="https://recruitingbypaycor.com/career/CareerHome.action?clientId=8a7883c691e3132e01921f902a632cb4" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-person-badge"></i></i></div>
+            <div><h5>Current Job Openings</h5><p class="text-secondary mb-0">Open Positions at Education Week<br><em class="managed-by">Managed by HR</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Human Resources & Payroll|IT & Helpdesk" data-tags="new change departing user forms onboarding offboarding access">
+        <a href="https://edweek.atlassian.net/servicedesk/customer/portal/7/group/45" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-person-gear"></i></div>
+            <div><h5>New/Change/Departing Employee Form</h5><p class="text-secondary mb-0">Form to request account setup, changes, or removal for staff<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ####### IT & Helpdesk -->
+      <div class="col-md-4 card-wrapper" data-cat="IT & Helpdesk" data-tags="helpdesk service desk ticket support it portal">
+        <a href="https://edweek.atlassian.net/servicedesk/customer/portal/7" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-life-preserver"></i></div>
+            <div><h5>IT Helpdesk Portal</h5><p class="text-secondary mb-0">Request for computers, accessories, and tech support<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="IT & Helpdesk" data-tags="knowledge kb howto how-to docs help wiki guide">
+        <a href="https://edweek.atlassian.net/wiki/spaces/ITSysOps/pages/9666751/How-to+articles" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-text"></i></div>
+            <div><h5>IT How‑To Articles</h5><p class="text-secondary mb-0">Guides for common IT tasks and troubleshooting<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="IT & Helpdesk" data-tags="knowledge kb howto how-to docs help wiki guide it portal">
+        <a href="https://edweek.atlassian.net/wiki/spaces/ITSysOps/overview" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-code"></i></div>
+            <div><h5>IT Wiki</h5><p class="text-secondary mb-0">Knowledge base with IT reference materials<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ######## Knowledge & File Management -->
+      <div class="col-md-4 card-wrapper" data-cat="Knowledge & File Management" data-tags="microsoft 365 office applications apps sharepoint onedrive">
+        <a href="https://edweek.atlassian.net/wiki/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-collection-fill"></i></div>
+            <div><h5>Confluence</h5><p class="text-secondary mb-0">Workspace for documentation and knowledge sharing<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Knowledge & File Management" data-tags="microsoft 365 office applications apps sharepoint onedrive">
+        <a href="https://editproj.sharepoint.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-share-fill"></i></div>
+            <div><h5>SharePoint</h5><p class="text-secondary mb-0">Platform for document management<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Knowledge & File Management" data-tags="microsoft 365 office applications apps sharepoint onedrive">
+        <a href="https://editproj-my.sharepoint.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-cloud-fill"></i></div>
+            <div><h5>OneDrive</h5><p class="text-secondary mb-0">Cloud storage for file access and sharing<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Knowledge & File Management" data-tags="upload media files photos videos vex">
+        <a href="https://edw.site/mediadropbox" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-folder-symlink-fill"></i></div>
+            <div><h5>Media Drop Box</h5><p class="text-secondary mb-0">Drop box for reporters to upload media files<br><em class="managed-by">Managed by VEX</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ######### Office Applications -->
+      <div class="col-md-4 card-wrapper" data-cat="Office Applications" data-tags="microsoft 365 office apps sharepoint onedrive">
+        <a href="https://myapplications.microsoft.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+            <div><h5>Microsoft Office 365 Applications</h5><p class="text-secondary mb-0">Suite of cloud-based productivity and collaboration tools<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Office Applications" data-tags="microsoft 365 office excel apps sharepoint onedrive">
+        <a href="https://word.cloud.microsoft" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div><h5>Microsoft Word</h5><p class="text-secondary mb-0">Document creation and formatting tool<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Office Applications" data-tags="microsoft 365 office word apps sharepoint onedrive">
+        <a href="https://excel.cloud.microsoft" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+            <div><h5>Microsoft Excel</h5><p class="text-secondary mb-0">Data organization and analysis tool<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>  
+      <div class="col-md-4 card-wrapper" data-cat="Office Applications" data-tags="microsoft 365 office word apps sharepoint onedrive">
+        <a href="https://m365.cloud.microsoft/launch/onenote" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-pencil-square"></i></div>
+            <div><h5>Microsoft OneNote</h5><p class="text-secondary mb-0">Notebook for organizing notes & ideas<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      
+      <!-- ########## Project Management -->
+      <div class="col-md-4 card-wrapper" data-cat="Project Management" data-tags="planner tasks boards microsoft planner tasks.office.com">
+        <a href="https://tasks.office.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-kanban"></i></div>
+            <div><h5>Planner</h5><p class="text-secondary mb-0">Project boards & task tracking<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Project Management" data-tags="smartsheet projects sheets dashboards gantt">
+        <a href="https://app.smartsheet.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-table"></i></div>
+            <div><h5>Smartsheet</h5><p class="text-secondary mb-0">Project sheets, gantts & dashboards<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Project Management" data-tags="smartsheet projects sheets dashboards gantt">
+        <a href="https://app.smartsheet.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-kanban-fill"></i></div>
+            <div><h5>MS Project</h5><p class="text-secondary mb-0">Project plans & budgets<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ########### Sales & CRM -->
+      <div class="col-md-4 card-wrapper" data-cat="Sales & CRM" data-tags="salesforce crm sales sfdc">
+        <a href="https://educationweek.my.salesforce.com/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon position-relative">
+              <i class="bi bi-cloud"></i>
+              <i class="bi bi-currency-dollar position-absolute top-50 start-50 translate-middle" style="font-size:1rem;"></i>
+            </div>
+            <div><h5>Salesforce</h5><p class="text-secondary mb-0">CRM for sales and customer data<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      
+      <!-- ############ Security -->
+      <div class="col-md-4 card-wrapper" data-cat="Security" data-tags="keeper password passwords login sigin nmanager security vault">
+        <a href="https://keepersecurity.com/vault/" class="card card-link text-decoration-none h-100" target="_blank" rel="noopener">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-shield-lock"></i></div>
+            <div><h5>Keeper Vault</h5><p class="text-secondary mb-0">Company password manager<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Security|Email, Chat & Meetings" data-tags="microsoft authenticator mfa 2fa setup security">
+        <a href="https://edweek.atlassian.net/wiki/spaces/ITSysOps/pages/131039234" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-shield-check"></i></div>
+            <div><h5>Microsoft Authenticator for MFA</h5><p class="text-secondary mb-0">Multi-factor authentication setup<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Security" data-tags="microsoft phishing hack cyber mfa 2fa setup security">
+        <a href="https://security.microsoft.com/" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-person-lock"></i></div>
+            <div><h5>Microsoft Defender</h5><p class="text-secondary mb-0">Security app for web protection<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Security" data-tags="microsoft phishing hack cyber mfa 2fa setup security">
+        <a href="https://educationweek.slack.com/archives/C01ME4XH6DA" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-hash"></i></div>
+            <div><h5>#Cybersecurity (Slack)</h5><p class="text-secondary mb-0">Cyber Security Awareness Channel<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ############# Trackers and Requests Management -->
+      <div class="col-md-4 card-wrapper" data-cat="Trackers & Requests Management" data-tags="editorial tracker">
+        <a href="https://edweek.atlassian.net/browse/EDITORIAL" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-journal-richtext"></i></div>
+            <div><h5>Editorial Tracker</h5><p class="text-secondary mb-0">Through Jira<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Trackers & Requests Management" data-tags="art tracker">
+        <a href="https://edweek.atlassian.net/jira/servicedesk/projects/ART" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-brush"></i></div>
+            <div><h5>Art Tracker</h5><p class="text-secondary mb-0">Through Jira<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Trackers & Requests Management" data-tags="opinion tracker">
+        <a href="https://edweek.atlassian.net/jira/servicedesk/projects/COMM" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-chat-square-quote"></i></div>
+            <div><h5>Opinion Tracker</h5><p class="text-secondary mb-0">Through Jira<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Trackers & Requests Management" data-tags="email promotions tracker">
+        <a href="https://edweek.atlassian.net/jira/servicedesk/projects/EP" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-envelope-open"></i></div>
+            <div><h5>Email Promotions Tracker</h5><p class="text-secondary mb-0">Through Jira<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Trackers & Requests Management" data-tags="gos group online subscriptions">
+        <a href="https://edweek.atlassian.net/browse/GOS" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-people"></i></div>
+            <div><h5>Group Online Subscriptions (GOS) Tracker</h5><p class="text-secondary mb-0">Through Jira<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Trackers & Requests Management" data-tags="grant tracker">
+        <a href="https://edweek.atlassian.net/browse/GT" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-cash-stack"></i></div>
+            <div><h5>Grant Tracker</h5><p class="text-secondary mb-0">Through Jira<br><em class="managed-by">Managed by IT</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="Trackers & Requests Management" data-tags="ad production tracker">
+        <a href="https://app.smartsheet.com/dashboards/J4XQfr4xMQXCWRjJR9F2cFv8GcV8r8m9623qvWQ1" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-badge-ad"></i></div>
+            <div><h5>Ad Production Tracker</h5><p class="text-secondary mb-0">Through Smartsheet<br><em class="managed-by">Managed by AdOps</em></p></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ############## Website Support, UX & Engineering -->
+      <div class="col-md-4 card-wrapper" data-cat="UX, Engineering & Website Support|Trackers & Requests Management" data-tags="website support tracker dxo support bugs issues change requests">
+        <a href="https://edweek.atlassian.net/servicedesk/customer/portal/17" class="card card-link text-decoration-none h-100">
+          <div class="card-body d-flex gap-3 align-items-start">
+            <div class="link-icon"><i class="bi bi-tools"></i></div>
+            <div><h5>Website Support Tracker</h5><p class="text-secondary mb-0">Submit tickets for changes, bugs & issues related to the EdW & MB sites<br><em class="managed-by">Managed by DXO</em></p></div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 card-wrapper" data-cat="UX, Engineering & Website Support" data-tags="dts digital strategy project intake framework prioritization request backlog roadmap">
+	     <div class="card card-link text-decoration-none h-100 copy-email" data-email="digital-roadmap@educationweek.org" style="cursor: pointer;">
+	       <div class="card-body d-flex gap-3 align-items-start">
+	         <div class="link-icon"><i class="bi bi-inbox"></i></div>
+	         <div>
+	           <h5>Prioritization Framework Intake</h5>
+	           <p class="text-secondary mb-0">
+	             Email project requests to DXO via<br>
+	             <em>digital-roadmap@educationweek.org</em>
+	           </p>
+	         </div>
+	       </div>
+	     </div>
+	   </div>	
+
+    <!-- End of LINKS / CARDS GRID -->      
+    </div>
+
+	<!-- Tips and utility section -->
+
+    <p class="text-center text-secondary mt-4" id="searchEmpty" style="display:none;">No results found.</p>
+
+    <hr class="my-5" />
+    <section class="mb-5">
+      <h3 class="h5 mb-3">Important Notes</h3>
+      <div class="row g-3">
+        <div class="col-md-8">
+          <div class="alert alert-info d-flex align-items-start gap-3 mb-0" role="alert">
+            <i class="bi bi-info-circle fs-4"></i>
+            <div>
+              <!-- ><strong>Official address:</strong> https://edweek.space — verify this address in your browser’s location bar to ensure you're on the official site and to confirm authenticity.
+               <br> -->
+ 			    <strong>Access Note:</strong> If you don’t have access to a specific system or tool, please reach out to the department listed under <strong>“Managed by ...”</strong>.
+                <br>
+ 			    <strong>Official URL: Please double-check the address</strong> in your browser bar to ensure you’re on the correct site, as imitation sites could contain malware. Only access it via this verified link:  <strong>https://edweek.space</strong>.
+                <br>
+    			<strong>Feedback:</strong> If something looks off or a link/resource is missing, email <em><strong><a href="mailto:dxo@educationweek.org">DXO@educationweek.org</a></strong></em> to share your tips and thoughts.
+            </div>
+          </div>
+        </div>        
+		<div class="col-md-4 small text-secondary d-flex flex-column justify-content-center">
+		  <div>URL: <strong>https://edweek.space</strong> (verify link in address bar)</div>
+		  <div>Version 0.9.9-beta / Build 202403</div>
+		  <div>Environment: Production</div>
+		  <div>Last updated: <span id="lastUpdated" class="ms-1"></span></div>
+		  <div>System Status: <a href="http://status.epe.org/">[View uptime and incidents →]</a></div>
+		  <div>Your IP: <span id="userIp"></span></div>		
+		  <small class="text-muted">(IP shown for diagnostic purposes only)</small>
+		</div>
+        <!--
+        <div class="col-md-4 text-md-end small text-secondary d-flex align-items-center">Last updated: <span id="lastUpdated" class="ms-1"></span></div>
+      </div> 
+      -->
+    </section>
+  </main>
+
+
+<!-- Ultimate footer -->
+<footer class="border-top py-4 mt-0 text-center">
+  <div class="small text-secondary">
+    © <span id="year"></span> Editorial Projects in Education, DBA Education Week &nbsp; | &nbsp;
+    Built with care and purpose by 
+    <span class="dxo-link"><a href="https://www.edweek.org/about/our-people#dxo" class="dxo-link no-link-style">DXO — Digital eXperience &amp; Operations</a></span>
+  </div>
+</footer>
+
+
+<!-- Supporting JS chain -->
+  <script>
+  // Copyright Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
+
+    const search = document.getElementById('search');
+    const filterButtons = Array.from(document.querySelectorAll('#filterBar [data-filter]'));
+    const cards = Array.from(document.querySelectorAll('.card-wrapper'));
+    const empty = document.getElementById('searchEmpty');
+    let activeFilter = 'All';
+    const norm = s => (s || '').toString().toLowerCase();
+
+    function inCategory(card, filter) {
+      if (filter === 'All') return true;
+      const cats = (card.getAttribute('data-cat') || '').split('|').map(s => norm(s.trim()));
+      return cats.includes(norm(filter));
+    }
+
+    function updateDisplay() {
+      const term = norm(search.value.trim());
+      let shown = 0;
+      cards.forEach(card => {
+        const matchesFilter = inCategory(card, activeFilter);
+        const title = norm(card.querySelector('h5')?.textContent);
+        const body = norm(card.querySelector('p')?.textContent);
+        const tags = norm(card.getAttribute('data-tags'));
+        const matchesSearch = !term || title.includes(term) || body.includes(term) || tags.includes(term);
+        const show = matchesFilter && matchesSearch;
+        card.style.display = show ? '' : 'none';
+        if (show) shown++;
+      });
+      empty.style.display = shown ? 'none' : 'block';
+    }
+
+    let t = null;
+    search.addEventListener('input', () => { clearTimeout(t); t = setTimeout(updateDisplay, 120); });
+    filterButtons.forEach(btn => btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.replace('btn-primary','btn-outline-secondary'));
+      btn.classList.replace('btn-outline-secondary','btn-primary');
+      activeFilter = btn.dataset.filter;
+      updateDisplay();
+    }));
+    updateDisplay();
+  </script>
+
+
+	<script>
+	// Copy email to clipboard and show tooltip feedback
+	document.querySelectorAll('.copy-email').forEach(card => {
+	  const email = card.getAttribute('data-email');
+	
+	  card.addEventListener('click', async () => {
+		try {
+		  await navigator.clipboard.writeText(email);
+		  showTooltip(card, 'Copied!');
+		} catch (err) {
+		  showTooltip(card, 'Failed to copy');
+		}
+	  });
+	
+	  card.addEventListener('mouseenter', () => showTooltip(card, 'Click to copy email address'));
+	  card.addEventListener('mouseleave', () => hideTooltip());
+	});
+	
+	let tooltip;
+	function showTooltip(element, text) {
+	  hideTooltip();
+	  tooltip = document.createElement('div');
+	  tooltip.className = 'custom-tooltip';
+	  tooltip.textContent = text;
+	  document.body.appendChild(tooltip);
+	  const rect = element.getBoundingClientRect();
+	  tooltip.style.left = `${rect.left + rect.width / 2}px`;
+	  tooltip.style.top = `${rect.top - 30}px`;
+	  tooltip.style.transform = 'translateX(-50%)';
+	}
+	
+	function hideTooltip() {
+	  if (tooltip) {
+		tooltip.remove();
+		tooltip = null;
+	  }
+	}
+	</script>
+
+	<script>
+	// IP Address widget
+	fetch('https://api.ipify.org?format=json')
+	.then(response => response.json())
+	.then(data => {
+	  document.getElementById('userIp').textContent = data.ip;
+	})
+	.catch(() => {
+	  document.getElementById('userIp').textContent = 'Unavailable';
+	});
+	</script>
+
+	<script>
+	// Dark Mode Toggle
+	  (function () {
+		const root = document.documentElement;
+		const btn = document.getElementById('themeToggle');
+	
+		// Determine initial theme
+		const saved = localStorage.getItem('theme');
+		const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const initial = saved || (prefersDark ? 'dark' : 'light');
+		applyTheme(initial);
+	
+		// Toggle handler
+		btn.addEventListener('click', () => {
+		  const next = (root.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+		  applyTheme(next);
+		  localStorage.setItem('theme', next);
+		});
+	
+		function applyTheme(mode) {
+		  root.setAttribute('data-theme', mode);
+		  const isDark = (mode === 'dark');
+	
+		  btn.setAttribute('aria-pressed', String(isDark));
+		  btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+		  const icon = btn.querySelector('i');
+		  icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-stars';
+		}
+	  })();
+	</script>
+
+	<script>
+	// Bat Animation 
+	(function () {
+	  const logo = document.querySelector('.logo-box');
+	  if (!logo) return;
+	
+	  let hoverLock = false;
+	  logo.addEventListener('mouseenter', () => {
+		if (hoverLock) return;
+		hoverLock = true;
+	
+		const count = 3 + Math.floor(Math.random() * 2);
+		for (let i = 0; i < count; i++) {
+		  setTimeout(() => spawnBat(logo), i * 120);
+		}
+	
+		setTimeout(() => { hoverLock = false; }, 800);
+	  });
+	
+	  function spawnBat(target) {
+		const b = document.createElement('span');
+		b.className = 'bat';
+		b.setAttribute('aria-hidden', 'true');
+		b.textContent = '^v^';
+	
+		const dx = 40 + Math.random() * 30;   // make horizontal drift stronger
+		const dy = -40 - Math.random() * 50;  // make upward drift a bit shallower
+		const dur = (1.3 + Math.random() * 0.7);
+		const size = 16 + Math.round(Math.random() * 6);
+	
+		b.style.setProperty('--dx', dx + 'px');
+		b.style.setProperty('--dy', dy + 'px');
+		b.style.setProperty('--dur', dur + 's');
+		b.style.fontSize = size + 'px';
+		b.style.left = (50 + Math.random() * 10) + '%';
+		b.style.top = (15 + Math.random() * 10) + '%';
+	
+		target.appendChild(b);
+		b.addEventListener('animationend', () => b.remove());
+	  }
+	})();
+	</script>
+
+	<script src="edweek-start-copyright.js"></script>
+	
+</body>
 </html>
