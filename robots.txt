@@ -1,2 +1,98 @@
+
+       ██████████   █████ █████    ███████   
+      ░░███░░░░███ ░░███ ░░███   ███░░░░░███ 
+       ░███   ░░███ ░░███ ███   ███     ░░███
+       ░███    ░███  ░░█████   ░███      ░███
+       ░███    ░███   ███░███  ░███      ░███
+       ░███    ███   ███ ░░███ ░░███     ███ 
+      ░██████████   █████ █████ ░░░███████░  
+      ░░░░░░░░░░   ░░░░░ ░░░░░    ░░░░░░░    
+                                       
+# ==========================================================
+# robots.txt for edweek.space
+# This site is for internal use only.
+# All web crawlers, AI systems, and data scrapers are disallowed.
+# ==========================================================
+
 User-agent: *
 Disallow: /
+
+# --- Explicit blocks for known AI and LLM crawlers ---
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Applebot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: DuckAssistBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: SentiBot
+Disallow: /
+
+User-agent: ai-scraper
+Disallow: /
+
+User-agent: gptcrawler
+Disallow: /
+
+# --- Disallow embedding, mirroring, and archiving ---
+User-agent: archive.org_bot
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+# --- Disallow experimental or unknown bots ---
+User-agent: *
+Disallow: /
+
+# --- End of file ---
