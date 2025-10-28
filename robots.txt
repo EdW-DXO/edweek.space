@@ -8,16 +8,21 @@
       ░██████████   █████ █████ ░░░███████░  
       ░░░░░░░░░░   ░░░░░ ░░░░░    ░░░░░░░    
                                        
-# ==========================================================
+# ================================================================
 # robots.txt for edweek.space
 # This site is for internal use only.
 # All web crawlers, AI systems, and data scrapers are disallowed.
-# ==========================================================
+# ================================================================
 
 User-agent: *
 Disallow: /
 
 # --- Explicit blocks for known AI and LLM crawlers ---
+
+User-Agent: *
+Content-signal: search=no,ai-train=no
+Disallow: /
+
 User-agent: GPTBot
 Disallow: /
 
@@ -55,6 +60,9 @@ User-agent: Applebot
 Disallow: /
 
 User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: meta-externalagent
 Disallow: /
 
 User-agent: DataForSeoBot
@@ -96,3 +104,5 @@ User-agent: *
 Disallow: /
 
 # --- End of file ---
+
+
