@@ -1,5 +1,5 @@
 
-/* ===== Halloween Treatment OVERRIDES: box height, logo size, hat placement ===== */
+/* ===== Christmas Treatment OVERRIDES: box height, logo size, hat placement ===== */
 
 /* 1) Control the white/blue box height (the logo container) */
 header .logo-box,
@@ -16,11 +16,11 @@ header .logo-box > img,
   display: block;
   width: auto !important;                 /* kill any old width: 65% */
   height: auto !important;
-  max-height: var(--logo-max-height, 64px) !important; /* ← adjust */
+  max-height: var(--logo-max-height, 50px) !important; /* ← adjust */
   object-fit: contain;
 }
 
-/* 3) Halloween hat overlay (independent from logo size) */
+/* 3) Hat overlay (independent from logo size) */
 	header .logo-box.xmas::after,
 	.logo-box.xmas::after {
 	  content: "";
@@ -28,11 +28,11 @@ header .logo-box > img,
 	  /* Fine-tune these three numbers only */
 	  width: var(--hat-width, 90px);          /* ← hat pixel width */
 	  aspect-ratio: 1 / 1;
-	  top: var(--hat-offset-y, -21px);        /* up(-) / down(+) */
-	  right: var(--hat-offset-x, -10px);       /* left(-) / right(+) */
+	  top: var(--hat-offset-y, -10px);        /* up(-) / down(+) */
+	  right: var(--hat-offset-x, -9px);       /* left(-) / right(+) */
 	 
 /* Or split into separate properties */
-background-image: url("../img/halloween-hat.png");
+background-image: url("../img/xmas-hat.png");
 background-repeat: no-repeat;
 background-position: center;
 background-size: contain;

@@ -1,0 +1,24 @@
+{
+  "name": "EdWeek Space",
+  "short_name": "EdWeek.Space",
+  "description": "A curated space for accessing EdWeek's key platforms, apps, and support resources — built by DXO (Digital eXperience & Operations).",
+  "icons": [
+    {
+      "src": "/assets/edw-sq-logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/edw-sq-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00529b",
+  "orientation": "portrait-primary",
+  "id": "edweek.space"
+}
