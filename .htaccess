@@ -1,3 +1,6 @@
+RemoveHandler .js
+AddType application/javascript .js
+
 X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 X-Content-Type-Options: nosniff
 X-Frame-Options: DENY
