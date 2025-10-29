@@ -1,9 +1,11 @@
 RemoveHandler .js
 AddType application/javascript .js
 
-X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
-X-Content-Type-Options: nosniff
-X-Frame-Options: DENY
-X-XSS-Protection: 1; mode=block
-Referrer-Policy: no-referrer
-Permissions-Policy: interest-cohort=()
+<IfModule mod_headers.c>
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: no-referrer
+  Permissions-Policy: interest-cohort=()
+</IfModule>
