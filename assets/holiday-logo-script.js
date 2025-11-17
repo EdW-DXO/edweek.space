@@ -1,4 +1,4 @@
-	<script>
+
 	// Holiday Sprinkler Animation 
 	(function () {
 	  const logo = document.querySelector('.logo-box');
@@ -41,4 +41,3 @@
 		b.addEventListener('animationend', () => b.remove());
 	  }
 	})();
-	</script>
