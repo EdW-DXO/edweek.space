@@ -1,0 +1,42 @@
+
+/* ===== Thanksgiving Treatment OVERRIDES: box height, logo size, hat placement ===== */
+
+/* 1) Control the white/blue box height (the logo container) */
+header .logo-box,
+.logo-box {
+  position: relative;
+  height: var(--logo-box-height, 160px);  /* ← adjust digit by digit */
+  display: flex;
+  align-items: center;                    /* vertically center the logo */
+}
+
+/* 2) Force the LOGO image to stop growing */
+header .logo-box > img,
+.logo-box > img {
+  display: block;
+  width: auto !important;                 /* kill any old width: 65% */
+  height: auto !important;
+  max-height: var(--logo-max-height, 64px) !important; /* ← adjust */
+  object-fit: contain;
+}
+
+/* 3) Halloween hat overlay (independent from logo size) */
+	header .logo-box.xmas::after,
+	.logo-box.xmas::after {
+	  content: "";
+	  position: absolute;
+	  /* Fine-tune these three numbers only */
+	  width: var(--hat-width, 112px);          /* ← hat pixel width */
+	  aspect-ratio: 1 / 1;
+	  top: var(--hat-offset-y, -29px);        /* up(-) / down(+) */
+	  right: var(--hat-offset-x, -16px);       /* left(-) / right(+) */
+	 
+/* Or split into separate properties */
+background-image: url("../img/thanksgiving-hat.png");
+background-repeat: no-repeat;
+background-position: center;
+background-size: contain;
+		
+	  pointer-events: none;
+	  z-index: 2;
+	}
