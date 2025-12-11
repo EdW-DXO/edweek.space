@@ -15,8 +15,8 @@
       ░██████████   █████ █████ ░░░███████░  
       ░░░░░░░░░░   ░░░░░ ░░░░░    ░░░░░░░    
                                        
-	Version 1.6 / Build 202511
-	Last updated: December 1, 2025
+	Version 1.7 / Build 202511
+	Last updated: December 11, 2025
 
   ==============================================================
    This site (edweek.space) is for internal use only.
@@ -104,17 +104,15 @@
 <div class="ticker-bar" role="region" aria-label="Announcements">
   <div class="ticker-track">
 
-    <span class="ticker-item">🏛️ &nbsp;EdWeek Homecoming - December 9th–10th</span>
-    <span class="ticker-item">🍪 &nbsp;Annual Cookie Contest - December 10th at 1:30 PM</span>
-    <span class="ticker-item">⛄ &nbsp;Holiday Party - December 10th at 6:00 PM</span>
-    <span class="ticker-item">👚 &nbsp;Ugly Holiday Sweater Contest -  December 10th at 1:30 PM</span>
-	<span class="ticker-item">🌐 &nbsp;Bookmark www.edweek.space for quick access!</span>
+    <span class="ticker-item">🍪 &nbsp;Annual Cookie Contest — Winners: Daniela and Robyn</span>
+    <span class="ticker-item">👚 &nbsp;Ugly Holiday Sweater Contest — Winner: Caitlynn | Runner-Up: Jonathan</span>
+    <span class="ticker-item">⛄ &nbsp;Week of December 22 – Work From Home Week</span>
+    <span class="ticker-item">🌐 &nbsp;Bookmark www.edweek.space for quick access!</span>
 
     <!-- Duplicated for smoother continuous loop -->
-    <span class="ticker-item">🏛️ &nbsp;EdWeek Homecoming - December 9th–10th</span>
-    <span class="ticker-item">🍪 &nbsp;Annual Cookie Contest - December 10th at 1:30 PM</span>
-    <span class="ticker-item">⛄ &nbsp;Holiday Party - December 10th at 6:00 PM</span>
-    <span class="ticker-item">👚 &nbsp;Ugly Holiday Sweater Contest -  December 10th at 1:30 PM</span>
+    <span class="ticker-item">🍪 &nbsp;Annual Cookie Contest — Winners: Daniela and Robyn</span>
+    <span class="ticker-item">👚 &nbsp;Ugly Holiday Sweater Contest — Winner: Caitlynn | Runner-Up: Jonathan</span>
+    <span class="ticker-item">⛄ &nbsp;Week of December 22 – Work From Home Week</span>
     <span class="ticker-item">🌐 &nbsp;Bookmark www.edweek.space for quick access!</span>
 
   </div>
@@ -822,7 +820,7 @@
         </div>        
 		<div class="col-md-4 small text-secondary d-flex flex-column justify-content-center">
 		  <div>URL: <strong>https://edweek.space</strong> (verify link in address bar)</div>
-		  <div>Version 1.6 / Build 202511</div>
+		  <div>Version 1.7 / Build 202511</div>
 		  <div>Environment: Production</div>
 		  <div>Last Online: <span id="lastUpdated" class="ms-1"></span></div>
 		  <div>System Status: <a href="http://status.epe.org/">[View uptimes & incidents →]</a></div>
@@ -989,51 +987,6 @@
 		  icon.className = isDark ? 'bi bi-sun-fill' : 'bi bi-moon-stars';
 		}
 	  })();
-	</script>
-
-	<script>
-	// Holiday Sprinkler Animation 
-	(function () {
-	  const logo = document.querySelector('.logo-box');
-	  if (!logo) return;
-	
-	  let hoverLock = false;
-	  logo.addEventListener('mouseenter', () => {
-		if (hoverLock) return;
-		hoverLock = true;
-	
-		const count = 3 + Math.floor(Math.random() * 2);
-		for (let i = 0; i < count; i++) {
-		  setTimeout(() => spawnBat(logo), i * 120);
-		}
-	
-		setTimeout(() => { hoverLock = false; }, 800);
-	  });
-	
-	  function spawnBat(target) {
-		const b = document.createElement('span');
-		b.className = 'bat';
-		b.setAttribute('aria-hidden', 'true');
-		//b.textContent = '^v^';  // for Halloween
-		//b.textContent = '🍁';  // for Thanksgiving
-		b.textContent = '🔔';  // for Christmas
-		
-		const dx = 40 + Math.random() * 30;   // make horizontal drift stronger
-		const dy = -40 - Math.random() * 50;  // make upward drift a bit shallower
-		const dur = (1.3 + Math.random() * 0.7);
-		const size = 16 + Math.round(Math.random() * 6);
-	
-		b.style.setProperty('--dx', dx + 'px');
-		b.style.setProperty('--dy', dy + 'px');
-		b.style.setProperty('--dur', dur + 's');
-		b.style.fontSize = size + 'px';
-		b.style.left = (50 + Math.random() * 10) + '%';
-		b.style.top = (15 + Math.random() * 10) + '%';
-	
-		target.appendChild(b);
-		b.addEventListener('animationend', () => b.remove());
-	  }
-	})();
 	</script>
 
 </body>
